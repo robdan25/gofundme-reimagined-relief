@@ -18,21 +18,20 @@ const Header = () => {
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#campaigns" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Campaigns
+            <a href="#what-to-donate" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              What to Donate
             </a>
-            <a href="#how-it-works" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              How it Works
+            <a href="#drop-off" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Drop-Off & Shipping
+            </a>
+            <a href="#partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Partners
             </a>
             <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </a>
-            <Button variant="outline" size="sm">
-              <Search className="w-4 h-4 mr-2" />
-              Search
-            </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary-hover">
-              Start Campaign
+            <Button size="sm" className="bg-primary hover:bg-primary-hover text-white">
+              Start a Drive
             </Button>
           </nav>
 
@@ -49,21 +48,20 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
-              <a href="#campaigns" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Campaigns
+              <a href="#what-to-donate" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                What to Donate
               </a>
-              <a href="#how-it-works" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                How it Works
+              <a href="#drop-off" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Drop-Off & Shipping
+              </a>
+              <a href="#partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Partners
               </a>
               <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 About
               </a>
-              <Button variant="outline" size="sm" className="w-full">
-                <Search className="w-4 h-4 mr-2" />
-                Search
-              </Button>
-              <Button size="sm" className="w-full bg-primary hover:bg-primary-hover">
-                Start Campaign
+              <Button size="sm" className="w-full bg-primary hover:bg-primary-hover text-white">
+                Start a Drive
               </Button>
             </div>
           </nav>
