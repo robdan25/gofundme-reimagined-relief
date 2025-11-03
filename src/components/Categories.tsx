@@ -5,37 +5,43 @@ const Categories = () => {
   const categories = [
     {
       icon: Home,
-      name: "Housing",
+      name: "Shelter & Bedding",
+      description: "Tents, tarps, cots",
       count: 34,
       color: "text-primary",
     },
     {
       icon: Utensils,
       name: "Food & Water",
+      description: "Non-perishables, water",
       count: 28,
       color: "text-secondary",
     },
     {
       icon: Stethoscope,
-      name: "Medical",
+      name: "Medical & Health",
+      description: "First-aid, medicines",
       count: 19,
       color: "text-destructive",
     },
     {
-      icon: GraduationCap,
-      name: "Education",
-      count: 15,
+      icon: Heart,
+      name: "Sanitation & Cleaning",
+      description: "Soap, bleach, supplies",
+      count: 22,
       color: "text-success",
     },
     {
       icon: Briefcase,
-      name: "Livelihoods",
-      count: 22,
+      name: "Tools & Debris",
+      description: "Shovels, gloves, tools",
+      count: 15,
       color: "text-warning",
     },
     {
-      icon: Heart,
-      name: "Community",
+      icon: GraduationCap,
+      name: "School & Community",
+      description: "Books, supplies",
       count: 31,
       color: "text-primary",
     },
@@ -49,7 +55,7 @@ const Categories = () => {
             Browse by Category
           </h2>
           <p className="text-lg text-muted-foreground">
-            Find campaigns supporting specific relief efforts
+            Find drives supporting specific relief needs
           </p>
         </div>
         
@@ -63,7 +69,8 @@ const Categories = () => {
               >
                 <Icon className={`w-10 h-10 mx-auto mb-3 ${category.color} group-hover:scale-110 transition-transform`} />
                 <h3 className="font-semibold text-card-foreground mb-1">{category.name}</h3>
-                <p className="text-sm text-muted-foreground">{category.count} campaigns</p>
+                <p className="text-xs text-muted-foreground mb-2">{category.description}</p>
+                <p className="text-sm text-muted-foreground">{category.count} drives</p>
               </Card>
             );
           })}

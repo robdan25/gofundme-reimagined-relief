@@ -5,23 +5,23 @@ const HowItWorks = () => {
   const steps = [
     {
       icon: Search,
-      title: "Find a Campaign",
-      description: "Browse verified relief campaigns or search for specific needs. All campaigns are vetted for authenticity.",
+      title: "Check Approved Items",
+      description: "Browse GOJ and ODPEM lists to see exactly what's needed and duty-waived.",
     },
     {
       icon: CreditCard,
-      title: "Make a Donation",
-      description: "Donate securely with credit card, debit card, or digital payment. Choose one-time or monthly giving.",
+      title: "Pack & Label Your Supplies",
+      description: "Pack sturdy boxes or barrels, label them by category (medical, hygiene, tools), and follow our packing guides.",
     },
     {
       icon: Heart,
-      title: "Track Your Impact",
-      description: "Receive updates on how your donation is making a difference. See photos and stories from the field.",
+      title: "Drop Off or Ship",
+      description: "Bring items to a partner drop-off location or ship directly to our collection warehouse.",
     },
     {
       icon: CheckCircle,
-      title: "100% Transparency",
-      description: "Every dollar is tracked. View detailed reports on how funds are distributed and used for relief efforts.",
+      title: "We Deliver & Report Back",
+      description: "We work with trusted agencies in Jamaica to distribute supplies and share updates from the communities you've helped.",
     },
   ];
 
@@ -33,7 +33,7 @@ const HowItWorks = () => {
             How It Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Making a difference is simple and transparent. Here's how your donation helps.
+            Sending relief supplies is simple and transparent. Here's how your items help.
           </p>
         </div>
         

@@ -1,4 +1,4 @@
-import CampaignCard from "./CampaignCard";
+import DriveCard from "./DriveCard";
 import driveHygiene from "@/assets/drive-hygiene-kits.jpg";
 import driveSchool from "@/assets/drive-school-supplies.jpg";
 import driveMedical from "@/assets/drive-medical-supplies.jpg";
@@ -44,7 +44,7 @@ const FeaturedCampaigns = () => {
   ];
 
   return (
-    <section id="campaigns" className="py-16 bg-background">
+    <section id="drives" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -57,7 +57,7 @@ const FeaturedCampaigns = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {drives.map((drive, index) => (
-            <CampaignCard key={index} {...drive} />
+            <DriveCard key={index} {...drive} />
           ))}
         </div>
         

@@ -6,7 +6,7 @@ const Footer = () => {
       { label: "About Us", href: "#" },
       { label: "How It Works", href: "#how-it-works" },
       { label: "Our Team", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "Partners", href: "#partners" },
     ],
     support: [
       { label: "Help Center", href: "#" },
@@ -14,16 +14,16 @@ const Footer = () => {
       { label: "Privacy Policy", href: "#" },
       { label: "Terms of Service", href: "#" },
     ],
-    fundraising: [
-      { label: "Start a Campaign", href: "#" },
-      { label: "Success Stories", href: "#" },
-      { label: "Campaign Tips", href: "#" },
-      { label: "Pricing", href: "#" },
+    drives: [
+      { label: "Start a Drive", href: "#" },
+      { label: "What to Donate", href: "#what-to-donate" },
+      { label: "Drop-Off Locations", href: "#drop-off" },
+      { label: "Approved Items List", href: "#" },
     ],
     contact: [
       { label: "Contact Us", href: "#" },
       { label: "Press", href: "#" },
-      { label: "Partnerships", href: "#" },
+      { label: "Volunteer", href: "#" },
       { label: "Report Issue", href: "#" },
     ],
   };
@@ -41,7 +41,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Connecting donors with verified relief campaigns to help Jamaica rebuild after Hurricane Melissa.
+              Connecting donors with approved relief item drives to help Jamaica rebuild after Hurricane Melissa.
             </p>
             <div className="flex gap-3">
               <a href="#" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
@@ -86,9 +86,9 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Fundraising</h4>
+            <h4 className="font-semibold text-foreground mb-4">Relief Drives</h4>
             <ul className="space-y-2">
-              {footerLinks.fundraising.map((link, index) => (
+              {footerLinks.drives.map((link, index) => (
                 <li key={index}>
                   <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
@@ -118,7 +118,7 @@ const Footer = () => {
               © 2024 Unbiased Relief. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
-              100% of donations go directly to verified relief campaigns.
+              All relief supplies are verified and delivered directly to communities in need.
             </p>
           </div>
         </div>
