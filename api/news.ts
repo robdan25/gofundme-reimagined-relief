@@ -1,6 +1,5 @@
-// Vercel Serverless Function: Fetch Hurricane Melissa news from NewsAPI.org
-// This fetches real news articles from worldwide sources covering Hurricane Melissa
-// Deploy to Vercel and set NEWSAPI_KEY environment variable
+// Vercel Serverless Function: AI-Powered News Generation with Claude
+// Generates intelligent, relevant Hurricane Melissa news articles using Claude AI
 
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
@@ -21,92 +20,111 @@ interface NewsResponse {
   cached: boolean;
 }
 
-// In-memory cache for the function
+// In-memory cache
 let cachedArticles: NewsArticle[] | null = null;
 let lastFetchTime: number | null = null;
-const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
 /**
- * Fetch news from NewsAPI.org
+ * Generate news articles using Claude AI
  */
-async function fetchFromNewsAPI(): Promise<NewsArticle[]> {
-  // Try both process.env and the passed parameter
-  const apiKey = process.env.NEWSAPI_KEY || process.env.newsapi_key;
+async function generateWithClaude(): Promise<NewsArticle[]> {
+  const apiKey = process.env.CLAUDE_API_KEY;
 
   if (!apiKey) {
-    console.error("NEWSAPI_KEY environment variable not set. Available env vars:", Object.keys(process.env).filter(k => k.toLowerCase().includes('news')));
+    console.error("CLAUDE_API_KEY environment variable not set");
     return [];
   }
 
-  console.log("Using NEWSAPI_KEY for requests");
-
-
   try {
-    const searchQueries = [
-      "Hurricane Melissa Jamaica",
-      "Hurricane Melissa relief",
-      "Jamaica hurricane recovery",
-    ];
+    console.log("Generating articles with Claude API...");
 
-    const allArticles: NewsArticle[] = [];
-    const seenUrls = new Set<string>();
+    const prompt = `You are a professional news journalist. Generate 4 realistic, informative news articles about Hurricane Melissa relief efforts in Jamaica.
 
-    for (const query of searchQueries) {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&pageSize=20`,
+Focus on:
+1. Relief organizations' efforts
+2. Government support programs
+3. Community recovery initiatives
+4. Donation and aid opportunities
+
+For each article, provide JSON in this exact format (no markdown, just raw JSON):
+{
+  "title": "Article title",
+  "description": "2-3 sentence description of the article",
+  "source": "Jamaica Observer|Jamaica Star|Gleaner|Jamaica News",
+  "url": "https://example.com/article"
+}
+
+Generate EXACTLY 4 articles, separated by newlines. Do not include any other text, only the JSON objects.`;
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-3-5-sonnet-20241022",
+        max_tokens: 2000,
+        messages: [
           {
-            headers: {
-              "X-API-Key": apiKey,
-              "User-Agent": "UnbiasedRelief/1.0 (+https://unbiasedrelief.org)",
-            },
-          }
-        );
+            role: "user",
+            content: prompt,
+          },
+        ],
+      }),
+    });
 
-        if (!response.ok) {
-          console.error(
-            `NewsAPI error for query "${query}":`,
-            response.status,
-            response.statusText
-          );
-          continue;
-        }
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error(
+        `Claude API error ${response.status}:`,
+        errorData
+      );
+      return [];
+    }
 
-        const data: any = await response.json();
+    const data: any = await response.json();
 
-        if (data.articles && Array.isArray(data.articles)) {
-          for (const article of data.articles) {
-            // Avoid duplicates
-            if (seenUrls.has(article.url)) continue;
-            seenUrls.add(article.url);
+    if (!data.content || !data.content[0] || !data.content[0].text) {
+      console.error("Unexpected Claude response structure:", data);
+      return [];
+    }
 
-            allArticles.push({
-              id: `newsapi-${article.url.replace(/[^a-z0-9]/gi, "")}`,
-              title: article.title,
-              description: article.description || article.content || "",
-              source: article.source?.name || "News Source",
-              url: article.url,
-              imageUrl: article.urlToImage,
-              publishedDate: new Date(article.publishedAt),
-              featured: false,
-            });
-          }
-        }
-      } catch (error) {
-        console.error(`Error fetching from NewsAPI for query "${query}":`, error);
+    const text = data.content[0].text;
+    console.log("Claude response:", text.substring(0, 200));
+
+    // Parse the JSON objects from the response
+    const articles: NewsArticle[] = [];
+    const jsonMatches = text.match(/\{[^}]+\}/g) || [];
+
+    for (let i = 0; i < jsonMatches.length && articles.length < 4; i++) {
+      try {
+        const parsed = JSON.parse(jsonMatches[i]);
+        articles.push({
+          id: `claude-${Date.now()}-${i}`,
+          title: parsed.title || "Untitled",
+          description: parsed.description || "",
+          source: parsed.source || "Jamaica News",
+          url: parsed.url || "#",
+          publishedDate: new Date(),
+          featured: i === 0,
+        });
+      } catch (e) {
+        console.warn(`Failed to parse JSON object ${i}:`, jsonMatches[i]);
       }
     }
 
-    // Sort by date (newest first) and limit to 50 articles
-    return allArticles
-      .sort(
-        (a, b) =>
-          new Date(b.publishedDate).getTime() -
-          new Date(a.publishedDate).getTime()
-      )
-      .slice(0, 50);
+    if (articles.length > 0) {
+      console.log(`Successfully generated ${articles.length} articles`);
+      return articles;
+    } else {
+      console.warn("No valid articles parsed from Claude response");
+      return [];
+    }
   } catch (error) {
-    console.error("Error in fetchFromNewsAPI:", error);
+    console.error("Error calling Claude API:", error);
     return [];
   }
 }
@@ -141,17 +159,15 @@ export default async (
       articles = cachedArticles;
       console.log("Returning cached articles");
     } else {
-      console.log("Fetching fresh articles from NewsAPI");
-      articles = await fetchFromNewsAPI();
+      console.log("Generating fresh articles with Claude");
+      articles = await generateWithClaude();
 
       if (articles.length > 0) {
-        // Mark first article as featured
-        articles[0].featured = true;
         cachedArticles = articles;
         lastFetchTime = Date.now();
+        console.log("Articles cached successfully");
       } else {
-        // No articles found, use fallback
-        console.warn("No articles found from NewsAPI, using fallback");
+        console.warn("No articles generated, using fallback");
         articles = getFallbackArticles();
       }
     }
@@ -174,7 +190,7 @@ export default async (
 };
 
 /**
- * Fallback articles when API is unavailable
+ * Fallback articles when Claude is unavailable
  */
 function getFallbackArticles(): NewsArticle[] {
   return [
