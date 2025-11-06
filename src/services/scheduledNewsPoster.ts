@@ -1,7 +1,7 @@
 // Scheduled News Poster - Automatically fetches and posts Hurricane Melissa news
-// Uses Claude to aggregate news from Jamaican outlets at specified intervals
+// Uses hybrid approach: RSS feeds primary, Claude aggregator as fallback
 
-import { claudeNewsAggregator, type AggregatedNewsArticle } from './claudeNewsAggregator';
+import { hybridNewsService, type NewsArticle } from './hybridNewsService';
 import { timezoneService } from './timezoneService';
 
 export interface ScheduledNewsConfig {
@@ -76,10 +76,10 @@ class ScheduledNewsPoster {
    */
   async postNews(): Promise<void> {
     try {
-      console.log('Fetching Hurricane Melissa news from Jamaican sources...');
+      console.log('🔄 Fetching Hurricane Melissa news from Jamaican sources...');
 
-      // Fetch articles from Claude
-      const articles = await claudeNewsAggregator.fetchHurricaneMelissaNews(
+      // Fetch articles using hybrid service (RSS primary + Claude fallback)
+      const articles = await hybridNewsService.fetchNews(
         this.config.maxArticlesPerPost
       );
 
@@ -94,7 +94,12 @@ class ScheduledNewsPoster {
       // Update last post time
       this.lastPostTime = new Date();
 
-      console.log(`✅ Posted ${articles.length} Hurricane Melissa news articles at ${this.lastPostTime.toLocaleString('en-JM')} Jamaica Time`);
+      const rssCount = articles.filter((a) => a.fetchMethod === 'rss').length;
+      const claudeCount = articles.filter((a) => a.fetchMethod === 'claude').length;
+
+      console.log(
+        `✅ Posted ${articles.length} articles at ${this.lastPostTime.toLocaleString('en-JM')} Jamaica Time (${rssCount} RSS, ${claudeCount} Claude)`
+      );
     } catch (error) {
       console.error('Failed to post news:', error);
     }
@@ -103,7 +108,7 @@ class ScheduledNewsPoster {
   /**
    * Save articles to news-data.json (would need backend endpoint)
    */
-  private async saveToNewsData(articles: AggregatedNewsArticle[]): Promise<void> {
+  private async saveToNewsData(articles: NewsArticle[]): Promise<void> {
     try {
       // In a real scenario, this would call a backend API to save the articles
       // For now, it stores in localStorage as a demonstration

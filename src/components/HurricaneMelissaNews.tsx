@@ -20,12 +20,14 @@ export const HurricaneMelissaNews = ({
   const [error, setError] = useState<string | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true);
         setError(null);
+        console.log(`📰 [HurricaneMelissaNews] Fetching ${limit} articles...`);
 
         let fetchedArticles: NewsArticle[];
         if (featured) {
@@ -35,11 +37,21 @@ export const HurricaneMelissaNews = ({
           fetchedArticles = await newsService.getRecentArticles(limit);
         }
 
-        setArticles(fetchedArticles);
+        if (fetchedArticles && fetchedArticles.length > 0) {
+          console.log(`✅ [HurricaneMelissaNews] Successfully loaded ${fetchedArticles.length} articles`);
+          setArticles(fetchedArticles);
+          setError(null);
+        } else {
+          console.warn(`⚠️ [HurricaneMelissaNews] No articles returned, retrying...`);
+          // Retry once if no articles
+          if (retryCount < 1) {
+            setTimeout(() => setRetryCount(retryCount + 1), 2000);
+          }
+        }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : 'Failed to load news'
-        );
+        const errorMsg = err instanceof Error ? err.message : 'Failed to load news';
+        console.error(`❌ [HurricaneMelissaNews] Error:`, errorMsg);
+        setError(errorMsg);
       } finally {
         setLoading(false);
       }
@@ -50,7 +62,7 @@ export const HurricaneMelissaNews = ({
     // Refresh news every 15 minutes for real-time updates
     const interval = setInterval(fetchNews, 15 * 60 * 1000);
     return () => clearInterval(interval);
-  }, [limit, featured]);
+  }, [limit, featured, retryCount]);
 
   if (loading && articles.length === 0) {
     return (
@@ -103,7 +115,7 @@ export const HurricaneMelissaNews = ({
 
   return (
     <>
-      <div className={featured ? '' : 'grid md:grid-cols-2 lg:grid-cols-3 gap-6'}>
+      <div className={featured ? '' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}>
         {articles.map((article) => (
           <Card
             key={article.id}
@@ -120,7 +132,7 @@ export const HurricaneMelissaNews = ({
                 />
                 <div className="absolute top-3 left-3">
                   <Badge variant="secondary" className="bg-primary text-white">
-                    {article.source}
+                    {article.fetchMethod === 'rss' ? 'Jamaica News' : 'Unbiased Relief'}
                   </Badge>
                 </div>
               </div>

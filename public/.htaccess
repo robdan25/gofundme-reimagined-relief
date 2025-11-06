@@ -1,3 +1,16 @@
+# SPA Routing - Redirect all non-existent paths to index.html for client-side routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Don't rewrite actual files or directories
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Rewrite all other requests to index.html (SPA routing)
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
 # Disable caching for HTML files to always get latest version
 <FilesMatch "\.html?$">
   Header set Cache-Control "no-cache, no-store, must-revalidate"

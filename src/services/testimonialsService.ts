@@ -23,12 +23,10 @@ class TestimonialsService {
       role: 'Community Leader',
       location: 'Spanish Town',
       message:
-        'The relief efforts from Unbiased Relief have been absolutely life-changing for our community. They responded quickly and provided exactly what we needed. The volunteers were professional and compassionate every step of the way.',
-      organization: 'Spanish Town Community Center',
+        'Things are still very hard, but Unbiased Relief reached us quickly with food and basic supplies. Knowing someone showed up for our community means a lot.',
       date: new Date('2025-11-04'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-2',
@@ -36,37 +34,34 @@ class TestimonialsService {
       role: 'Healthcare Professional',
       location: 'Kingston',
       message:
-        'As a doctor in the affected area, I can attest to the quality of medical supplies provided. Unbiased Relief worked directly with healthcare facilities to ensure we had what was most needed. Their coordination was exceptional.',
+        'Our clinic was short on basic medicines after Melissa. The supplies from Unbiased Relief helped us keep seeing patients while we slowly rebuild.',
       organization: 'Kingston Medical Center',
       date: new Date('2025-11-03'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-3',
-      name: 'Patricia Williams',
-      role: 'Relief Volunteer',
-      location: 'Montego Bay',
+      name: 'Robert Bennett',
+      role: 'Family Head',
+      location: 'Port Antonio',
       message:
-        'I never realized how important organized relief efforts were until I volunteered. The training and coordination made such a difference. Unbiased Relief taught me that together, we can truly help our neighbors.',
+        'We\'re still picking up the pieces. The food, water and hygiene items we received through Unbiased Relief gave my family a start while we figure out what\'s next.',
       date: new Date('2025-11-02'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-4',
       name: 'Governor Michael Thompson',
       role: 'Parish Official',
-      location: 'St. Mary Parish',
+      location: 'St. Mary',
       message:
-        'The transparency and efficiency of Unbiased Relief is commendable. They provided regular updates, involved local authorities, and ensured aid reached those most in need. This is disaster relief done right.',
+        'Recovery will take time, but Unbiased Relief has been steady and transparent, working with local leaders to get help to the families most affected.',
       organization: 'St. Mary Parish Council',
       date: new Date('2025-11-01'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-5',
@@ -74,23 +69,10 @@ class TestimonialsService {
       role: 'Business Owner',
       location: 'Negril',
       message:
-        'When Hurricane Melissa hit, my business was severely damaged. The community support and relief efforts helped me get back on my feet. Unbiased Relief went beyond just providing goods - they restored hope.',
+        'My shop isn\'t fully back yet, but the support from Unbiased Relief helped me replace a few essentials and reopen the doors.',
       date: new Date('2025-10-31'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop',
-    },
-    {
-      id: 'testimonial-6',
-      name: 'Robert Bennett',
-      role: 'Family Head',
-      location: 'Port Antonio',
-      message:
-        'My family lost everything in the hurricane. Without the relief supplies and support, I don\'t know how we would have managed. The Unbiased Relief team treated us with dignity and kindness.',
-      date: new Date('2025-10-30'),
-      rating: 5,
-      verified: true,
-      avatar: 'https://images.unsplash.com/photo-1516003881520-1b8fa95b9f6e?w=200&h=200&fit=crop',
     },
   ];
 

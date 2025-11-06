@@ -6,7 +6,7 @@ import Categories from "@/components/Categories";
 import HowItWorks from "@/components/HowItWorks";
 import ImpactStats from "@/components/ImpactStats";
 import ConnectWithUs from "@/components/ConnectWithUs";
-import HurricaneMelissaNews from "@/components/HurricaneMelissaNews";
+import JamaicaNewsFeed from "@/components/JamaicaNewsFeed";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { OrganizationSchema, WebPageSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -54,7 +54,7 @@ const Index = () => {
               </p>
             </div>
 
-            <HurricaneMelissaNews limit={3} />
+            <JamaicaNewsFeed limit={3} />
 
             <div className="text-center mt-10">
               <Button asChild size="lg" className="bg-primary hover:bg-primary-hover text-white">

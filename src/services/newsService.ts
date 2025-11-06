@@ -1,17 +1,20 @@
 // News Service - Fetches and caches Hurricane Melissa news articles
-// Uses Jamaica timezone (EST/UTC-5) for all timestamps
+// Uses hybrid approach: RSS feeds primary, Claude aggregator as fallback
+// All timestamps use Jamaica timezone (EST/UTC-5)
 
+import { hybridNewsService } from './hybridNewsService';
 import { timezoneService } from './timezoneService';
 
 export interface NewsArticle {
   id: string;
   title: string;
   description: string;
-  source: 'Jamaica Observer' | 'Jamaica Star' | 'Gleaner' | 'Jamaica News';
+  source: string;
   url: string;
   imageUrl?: string;
   publishedDate: Date;
   featured?: boolean;
+  fetchMethod?: 'rss' | 'claude';
 }
 
 export interface NewsResponse {
@@ -25,47 +28,58 @@ const NEWS_DATA_URL = '/news-data.json';
 
 class NewsService {
   /**
-   * Fetch news articles from static JSON file
+   * Fetch news articles using hybrid service (RSS + Claude)
    * Falls back to cached data if fetch fails
    */
   async fetchNews(): Promise<NewsArticle[]> {
     try {
       const cached = this.getFromCache();
       if (cached && this.isCacheValid()) {
+        console.log('📦 [NewsService] Returning fresh cached news');
         return cached;
       }
 
-      const response = await fetch(NEWS_DATA_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      console.log('🔄 [NewsService] Fetching fresh news from hybrid service...');
+
+      // Use hybrid service to fetch news (RSS primary, Claude fallback)
+      // Set a timeout - if hybrid service takes too long, use cache
+      const timeoutPromise = new Promise<null>((resolve) => {
+        setTimeout(() => {
+          console.warn('⏱️ [NewsService] Fetch timeout - using cached data');
+          resolve(null);
+        }, 15000); // 15 second timeout
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch news data: ${response.status}`);
+      const fetchPromise = hybridNewsService.fetchNews(10);
+      const result = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (!result || result.length === 0) {
+        throw new Error('No articles returned from hybrid service');
       }
 
-      const data: any = await response.json();
-      const articles = (data.articles || []).map((article: any) => ({
+      // Convert to NewsArticle format with proper dates
+      const articles: NewsArticle[] = result.map((article) => ({
         ...article,
         publishedDate: new Date(article.publishedDate),
       }));
 
       // Cache the fresh data
       this.saveToCache(articles);
+      console.log(`✅ [NewsService] Successfully fetched and cached ${articles.length} articles`);
 
       return articles;
     } catch (error) {
-      console.error('Failed to fetch news:', error);
+      console.error('❌ [NewsService] Error fetching news:', error instanceof Error ? error.message : 'Unknown error');
 
-      // Return cached data even if stale
+      // Return cached data even if stale (better than nothing)
       const cached = this.getFromCache();
       if (cached && cached.length > 0) {
+        console.log(`📦 [NewsService] Returning stale cached data (${cached.length} articles)`);
         return cached;
       }
 
-      // Return fallback articles
+      // Return fallback articles only as last resort
+      console.log('⚠️ [NewsService] No cache available, returning fallback');
       return this.getFallbackArticles();
     }
   }
