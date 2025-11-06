@@ -82,7 +82,7 @@ const News = () => {
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               Real-time coverage of Hurricane Melissa relief efforts from major
-              Jamaican news outlets. Updated every 15 minutes.
+              Jamaican news outlets.
             </p>
 
             <div className="space-y-3 mt-6">
