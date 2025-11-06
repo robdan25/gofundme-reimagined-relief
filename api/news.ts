@@ -1,6 +1,6 @@
-// Vercel Serverless Function: Scrapes Jamaican news outlets for Hurricane Melissa articles
-// Deploy this to your Vercel project in the /api directory
-// This will be accessible at: https://your-domain.vercel.app/api/news
+// Vercel Serverless Function: Fetch Hurricane Melissa news from NewsAPI.org
+// This fetches real news articles from worldwide sources covering Hurricane Melissa
+// Deploy to Vercel and set NEWSAPI_KEY environment variable
 
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
@@ -8,7 +8,7 @@ interface NewsArticle {
   id: string;
   title: string;
   description: string;
-  source: "Jamaica Observer" | "Jamaica Star" | "Gleaner" | "Jamaica News";
+  source: string;
   url: string;
   imageUrl?: string;
   publishedDate: Date;
@@ -21,229 +21,103 @@ interface NewsResponse {
   cached: boolean;
 }
 
-// In-memory cache for the function (resets on redeploy)
+// In-memory cache for the function
 let cachedArticles: NewsArticle[] | null = null;
 let lastFetchTime: number | null = null;
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
 /**
- * Fetch news from multiple Jamaican news sources
+ * Fetch news from NewsAPI.org
  */
-async function scrapeJamaicaNews(): Promise<NewsArticle[]> {
-  const articles: NewsArticle[] = [];
-  const searchKeyword = "Hurricane Melissa";
+async function fetchFromNewsAPI(): Promise<NewsArticle[]> {
+  const apiKey = process.env.NEWSAPI_KEY;
 
-  try {
-    // Try to scrape Jamaica Observer
-    articles.push(
-      ...(await scrapeJamaicaObserver(searchKeyword))
-    );
-  } catch (error) {
-    console.error("Error scraping Jamaica Observer:", error);
+  if (!apiKey) {
+    console.error("NEWSAPI_KEY environment variable not set");
+    return [];
   }
 
   try {
-    // Try to scrape Jamaica Star
-    articles.push(
-      ...(await scrapeJamaicaStar(searchKeyword))
-    );
-  } catch (error) {
-    console.error("Error scraping Jamaica Star:", error);
-  }
+    const searchQueries = [
+      "Hurricane Melissa Jamaica",
+      "Hurricane Melissa relief",
+      "Jamaica hurricane recovery",
+    ];
 
-  try {
-    // Try to scrape Gleaner
-    articles.push(
-      ...(await scrapeGleaner(searchKeyword))
-    );
-  } catch (error) {
-    console.error("Error scraping Gleaner:", error);
-  }
+    const allArticles: NewsArticle[] = [];
+    const seenUrls = new Set<string>();
 
-  // Remove duplicates and sort by date
-  const uniqueArticles = Array.from(
-    new Map(articles.map((a) => [a.url, a])).values()
-  ).sort(
-    (a, b) =>
-      new Date(b.publishedDate).getTime() -
-      new Date(a.publishedDate).getTime()
-  );
+    for (const query of searchQueries) {
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&pageSize=20`,
+          {
+            headers: {
+              "X-API-Key": apiKey,
+              "User-Agent": "UnbiasedRelief/1.0 (+https://unbiasedrelief.org)",
+            },
+          }
+        );
 
-  return uniqueArticles;
-}
+        if (!response.ok) {
+          console.error(
+            `NewsAPI error for query "${query}":`,
+            response.status,
+            response.statusText
+          );
+          continue;
+        }
 
-/**
- * Scrape Jamaica Observer
- */
-async function scrapeJamaicaObserver(
-  keyword: string
-): Promise<NewsArticle[]> {
-  const articles: NewsArticle[] = [];
+        const data: any = await response.json();
 
-  try {
-    const response = await fetch(
-      `https://www.jamaicaobserver.com/search?q=${encodeURIComponent(keyword)}`,
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; UnbiasedRelief/1.0; +https://unbiasedrelief.org)",
-        },
-      }
-    );
+        if (data.articles && Array.isArray(data.articles)) {
+          for (const article of data.articles) {
+            // Avoid duplicates
+            if (seenUrls.has(article.url)) continue;
+            seenUrls.add(article.url);
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const html = await response.text();
-
-    // Simple regex-based parsing for article links
-    // Production: use cheerio or similar library
-    const articleRegex =
-      /<a[^>]*href="([^"]*)"[^>]*title="([^"]*)"[^>]*>[^<]*<\/a>/gi;
-    let match;
-
-    while ((match = articleRegex.exec(html)) !== null) {
-      const [, url, title] = match;
-
-      if (title?.toLowerCase().includes(keyword.toLowerCase())) {
-        articles.push({
-          id: `jamaicaobserver-${Date.now()}-${Math.random()}`,
-          title: title,
-          description: `Latest news from Jamaica Observer about ${keyword}`,
-          source: "Jamaica Observer",
-          url: url.startsWith("http") ? url : `https://jamaicaobserver.com${url}`,
-          publishedDate: new Date(),
-          imageUrl: undefined,
-        });
+            allArticles.push({
+              id: `newsapi-${article.url.replace(/[^a-z0-9]/gi, "")}`,
+              title: article.title,
+              description: article.description || article.content || "",
+              source: article.source?.name || "News Source",
+              url: article.url,
+              imageUrl: article.urlToImage,
+              publishedDate: new Date(article.publishedAt),
+              featured: false,
+            });
+          }
+        }
+      } catch (error) {
+        console.error(`Error fetching from NewsAPI for query "${query}":`, error);
       }
     }
-  } catch (error) {
-    console.error("Jamaica Observer scraping failed:", error);
-  }
 
-  return articles;
+    // Sort by date (newest first) and limit to 50 articles
+    return allArticles
+      .sort(
+        (a, b) =>
+          new Date(b.publishedDate).getTime() -
+          new Date(a.publishedDate).getTime()
+      )
+      .slice(0, 50);
+  } catch (error) {
+    console.error("Error in fetchFromNewsAPI:", error);
+    return [];
+  }
 }
 
 /**
- * Scrape Jamaica Star
- */
-async function scrapeJamaicaStar(
-  keyword: string
-): Promise<NewsArticle[]> {
-  const articles: NewsArticle[] = [];
-
-  try {
-    const response = await fetch(
-      `https://www.jamaicastar.com/search?q=${encodeURIComponent(keyword)}`,
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; UnbiasedRelief/1.0; +https://unbiasedrelief.org)",
-        },
-      }
-    );
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const html = await response.text();
-
-    const articleRegex =
-      /<a[^>]*href="([^"]*)"[^>]*>([^<]*Hurricane[^<]*)<\/a>/gi;
-    let match;
-
-    while ((match = articleRegex.exec(html)) !== null) {
-      const [, url, title] = match;
-
-      if (title) {
-        articles.push({
-          id: `jamaicastar-${Date.now()}-${Math.random()}`,
-          title: title.trim(),
-          description: `Latest news from Jamaica Star about ${keyword}`,
-          source: "Jamaica Star",
-          url: url.startsWith("http") ? url : `https://jamaicastar.com${url}`,
-          publishedDate: new Date(),
-          imageUrl: undefined,
-        });
-      }
-    }
-  } catch (error) {
-    console.error("Jamaica Star scraping failed:", error);
-  }
-
-  return articles;
-}
-
-/**
- * Scrape Gleaner
- */
-async function scrapeGleaner(
-  keyword: string
-): Promise<NewsArticle[]> {
-  const articles: NewsArticle[] = [];
-
-  try {
-    const response = await fetch(
-      `https://www.jamaicagleaner.com/search?q=${encodeURIComponent(keyword)}`,
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; UnbiasedRelief/1.0; +https://unbiasedrelief.org)",
-        },
-      }
-    );
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const html = await response.text();
-
-    const articleRegex =
-      /<a[^>]*href="([^"]*)"[^>]*class="[^"]*article[^"]*"[^>]*>([^<]*)<\/a>/gi;
-    let match;
-
-    while ((match = articleRegex.exec(html)) !== null) {
-      const [, url, title] = match;
-
-      if (
-        title &&
-        title.toLowerCase().includes(keyword.toLowerCase())
-      ) {
-        articles.push({
-          id: `gleaner-${Date.now()}-${Math.random()}`,
-          title: title.trim(),
-          description: `Latest news from Jamaica Gleaner about ${keyword}`,
-          source: "Gleaner",
-          url: url.startsWith("http")
-            ? url
-            : `https://jamaicagleaner.com${url}`,
-          publishedDate: new Date(),
-          imageUrl: undefined,
-        });
-      }
-    }
-  } catch (error) {
-    console.error("Gleaner scraping failed:", error);
-  }
-
-  return articles;
-}
-
-/**
- * Main Vercel handler function
+ * Main handler for the API endpoint
  */
 export default async (
   req: VercelRequest,
-  res: VercelResponse<NewsResponse>
+  res: VercelResponse
 ): Promise<void> => {
-  // Set CORS headers
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  // Enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
@@ -251,67 +125,31 @@ export default async (
   }
 
   try {
-    let articles: NewsArticle[];
-    let isCached = false;
-
-    // Check if cached data is still valid
-    if (
+    // Check cache
+    const isCached =
       cachedArticles &&
       lastFetchTime &&
-      Date.now() - lastFetchTime < CACHE_DURATION
-    ) {
+      Date.now() - lastFetchTime < CACHE_DURATION;
+
+    let articles: NewsArticle[] = [];
+
+    if (isCached && cachedArticles) {
       articles = cachedArticles;
-      isCached = true;
+      console.log("Returning cached articles");
     } else {
-      // Fetch fresh data
-      articles = await scrapeJamaicaNews();
+      console.log("Fetching fresh articles from NewsAPI");
+      articles = await fetchFromNewsAPI();
 
-      // Update cache
-      cachedArticles = articles;
-      lastFetchTime = Date.now();
-    }
-
-    // Ensure we have at least some articles
-    if (!articles || articles.length === 0) {
-      articles = [
-        {
-          id: "fallback-1",
-          title: "Hurricane Melissa Recovery Updates",
-          description:
-            "Get the latest updates on Hurricane Melissa relief and recovery efforts across Jamaica. Communities continue resilience efforts with support from aid organizations.",
-          source: "Jamaica Observer",
-          url: "#",
-          publishedDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
-          featured: true,
-        },
-        {
-          id: "fallback-2",
-          title: "Relief Organizations Deploy Aid to Affected Areas",
-          description:
-            "Multiple international relief organizations are coordinating efforts to provide assistance to communities impacted by Hurricane Melissa.",
-          source: "Jamaica Star",
-          url: "#",
-          publishedDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
-        },
-        {
-          id: "fallback-3",
-          title: "Government Announces Hurricane Melissa Support Program",
-          description:
-            "The Jamaican government has announced a comprehensive support program for individuals and businesses affected by Hurricane Melissa.",
-          source: "Gleaner",
-          url: "#",
-          publishedDate: new Date(Date.now() - 3 * 60 * 60 * 1000),
-        },
-        {
-          id: "fallback-4",
-          title: "Communities Rally Together for Disaster Recovery",
-          description:
-            "Local communities across Jamaica demonstrate remarkable resilience as volunteers and organizations work together for recovery efforts.",
-          source: "Jamaica News",
-          url: "#",
-          publishedDate: new Date(Date.now() - 4 * 60 * 60 * 1000),
-        },
-      ];
+      if (articles.length > 0) {
+        // Mark first article as featured
+        articles[0].featured = true;
+        cachedArticles = articles;
+        lastFetchTime = Date.now();
+      } else {
+        // No articles found, use fallback
+        console.warn("No articles found from NewsAPI, using fallback");
+        articles = getFallbackArticles();
+      }
     }
 
     res.status(200).json({
@@ -324,38 +162,54 @@ export default async (
 
     // Return fallback data on error
     res.status(200).json({
-      articles: [
-        {
-          id: "error-fallback-1",
-          title: "Hurricane Melissa Recovery Updates",
-          description:
-            "Get the latest updates on Hurricane Melissa relief and recovery efforts across Jamaica. Communities continue resilience efforts with support from aid organizations.",
-          source: "Jamaica Observer",
-          url: "#",
-          publishedDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
-          featured: true,
-        },
-        {
-          id: "error-fallback-2",
-          title: "Relief Organizations Deploy Aid to Affected Areas",
-          description:
-            "Multiple international relief organizations are coordinating efforts to provide assistance to communities impacted by Hurricane Melissa.",
-          source: "Jamaica Star",
-          url: "#",
-          publishedDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
-        },
-        {
-          id: "error-fallback-3",
-          title: "Government Announces Hurricane Melissa Support Program",
-          description:
-            "The Jamaican government has announced a comprehensive support program for individuals and businesses affected by Hurricane Melissa.",
-          source: "Gleaner",
-          url: "#",
-          publishedDate: new Date(Date.now() - 3 * 60 * 60 * 1000),
-        },
-      ],
+      articles: getFallbackArticles(),
       lastUpdated: new Date(),
       cached: false,
     });
   }
 };
+
+/**
+ * Fallback articles when API is unavailable
+ */
+function getFallbackArticles(): NewsArticle[] {
+  return [
+    {
+      id: "fallback-1",
+      title: "Hurricane Melissa Recovery Updates",
+      description:
+        "Get the latest updates on Hurricane Melissa relief and recovery efforts across Jamaica. Communities continue resilience efforts with support from aid organizations.",
+      source: "Jamaica Observer",
+      url: "#",
+      publishedDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
+      featured: true,
+    },
+    {
+      id: "fallback-2",
+      title: "Relief Organizations Deploy Aid to Affected Areas",
+      description:
+        "Multiple international relief organizations are coordinating efforts to provide assistance to communities impacted by Hurricane Melissa.",
+      source: "Jamaica Star",
+      url: "#",
+      publishedDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    },
+    {
+      id: "fallback-3",
+      title: "Government Announces Hurricane Melissa Support Program",
+      description:
+        "The Jamaican government has announced a comprehensive support program for individuals and businesses affected by Hurricane Melissa.",
+      source: "Gleaner",
+      url: "#",
+      publishedDate: new Date(Date.now() - 3 * 60 * 60 * 1000),
+    },
+    {
+      id: "fallback-4",
+      title: "Communities Rally Together for Disaster Recovery",
+      description:
+        "Local communities across Jamaica demonstrate remarkable resilience as volunteers and organizations work together for recovery efforts.",
+      source: "Jamaica News",
+      url: "#",
+      publishedDate: new Date(Date.now() - 4 * 60 * 60 * 1000),
+    },
+  ];
+}
