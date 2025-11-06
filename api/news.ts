@@ -64,7 +64,7 @@ Return ONLY valid JSON array, no markdown or extra text:
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-sonnet-20240229",
         max_tokens: 2000,
         messages: [
           {
