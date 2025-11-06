@@ -1,8 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, X } from 'lucide-react';
+import { Calendar, X, Share2, MessageCircle, Copy, Check } from 'lucide-react';
 import { NewsArticle } from '@/services/newsService';
+import { useState } from 'react';
 
 interface ArticleModalProps {
   article: NewsArticle | null;
@@ -11,9 +12,24 @@ interface ArticleModalProps {
 }
 
 export const ArticleModal = ({ article, isOpen, onClose }: ArticleModalProps) => {
+  const [copied, setCopied] = useState(false);
+
   if (!article) return null;
 
   const fullContent = (article as any).fullContent || article.description;
+
+  const handleShareWhatsApp = () => {
+    const text = `${article.title}\n\n${article.description}\n\nRead more on Unbiased Relief`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleCopyLink = () => {
+    const text = `${article.title} - ${article.description}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -73,23 +89,55 @@ export const ArticleModal = ({ article, isOpen, onClose }: ArticleModalProps) =>
             </p>
           </div>
 
-          {/* Article Source Link - if available and not a placeholder */}
-          {article.url && article.url !== '#' && (
-            <div className="pt-4 border-t">
-              <Button
-                variant="outline"
-                asChild
-              >
-                <a
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+          {/* Share Options */}
+          <div className="pt-4 border-t">
+            <div className="flex flex-col gap-3">
+              <p className="text-sm font-semibold text-muted-foreground">Share Article</p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  className="gap-2 flex-1 min-w-fit"
+                  onClick={handleShareWhatsApp}
                 >
-                  View Original Article
-                </a>
-              </Button>
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
+                </Button>
+                <Button
+                  variant="outline"
+                  className="gap-2 flex-1 min-w-fit"
+                  onClick={handleCopyLink}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      Copied
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      Copy Text
+                    </>
+                  )}
+                </Button>
+                {article.url && article.url !== '#' && (
+                  <Button
+                    variant="outline"
+                    asChild
+                    className="gap-2 flex-1 min-w-fit"
+                  >
+                    <a
+                      href={article.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Original
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
-          )}
+          </div>
 
           {/* Close Button */}
           <div className="pt-4 border-t">
