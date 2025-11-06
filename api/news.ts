@@ -30,12 +30,16 @@ const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
  * Fetch news from NewsAPI.org
  */
 async function fetchFromNewsAPI(): Promise<NewsArticle[]> {
-  const apiKey = process.env.NEWSAPI_KEY;
+  // Try both process.env and the passed parameter
+  const apiKey = process.env.NEWSAPI_KEY || process.env.newsapi_key;
 
   if (!apiKey) {
-    console.error("NEWSAPI_KEY environment variable not set");
+    console.error("NEWSAPI_KEY environment variable not set. Available env vars:", Object.keys(process.env).filter(k => k.toLowerCase().includes('news')));
     return [];
   }
+
+  console.log("Using NEWSAPI_KEY for requests");
+
 
   try {
     const searchQueries = [
