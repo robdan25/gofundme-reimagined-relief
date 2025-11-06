@@ -1,4 +1,7 @@
 // News Service - Fetches and caches Hurricane Melissa news articles
+// Uses Jamaica timezone (EST/UTC-5) for all timestamps
+
+import { timezoneService } from './timezoneService';
 
 export interface NewsArticle {
   id: string;

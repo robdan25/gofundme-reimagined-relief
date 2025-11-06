@@ -1,8 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, X, Share2, MessageCircle, Copy, Check } from 'lucide-react';
+import { Calendar, X, Share2, MessageCircle, Copy, Check, Clock } from 'lucide-react';
 import { NewsArticle } from '@/services/newsService';
+import { timezoneService } from '@/services/timezoneService';
 import { useState } from 'react';
 
 interface ArticleModalProps {
@@ -55,19 +56,16 @@ export const ArticleModal = ({ article, isOpen, onClose }: ArticleModalProps) =>
 
         <div className="space-y-6">
           {/* Article Metadata */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground pb-4 border-b">
-            <div className="flex items-center gap-2">
+          <div className="space-y-3 pb-4 border-b">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="w-4 h-4" />
               <time dateTime={new Date(article.publishedDate).toISOString()}>
-                {new Date(article.publishedDate).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  meridiem: 'short',
-                })}
+                {timezoneService.formatWithTimeJamaica(new Date(article.publishedDate))}
               </time>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Clock className="w-4 h-4" />
+              <span>{timezoneService.getJamaicaOffsetString()}</span>
             </div>
           </div>
 

@@ -3,8 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, RefreshCw } from 'lucide-react';
+import { Calendar, RefreshCw, Clock } from 'lucide-react';
 import { newsService, NewsArticle } from '@/services/newsService';
+import { timezoneService } from '@/services/timezoneService';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ArticleModal from '@/components/ArticleModal';
@@ -84,19 +85,21 @@ const News = () => {
               Jamaican news outlets. Updated every 15 minutes.
             </p>
 
-            {lastUpdated && (
-              <div className="flex items-center gap-2 mt-6 text-sm text-muted-foreground">
-                <RefreshCw className="w-4 h-4" />
-                <span>
-                  Last updated:{' '}
-                  {lastUpdated.toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    meridiem: 'short',
-                  })}
-                </span>
+            <div className="space-y-3 mt-6">
+              {lastUpdated && (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <RefreshCw className="w-4 h-4" />
+                  <span>
+                    Last updated:{' '}
+                    {timezoneService.formatWithTimeJamaica(lastUpdated)}
+                  </span>
+                </div>
+              )}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Clock className="w-4 h-4" />
+                <span>Jamaica Time: {timezoneService.getJamaicaOffsetString()}</span>
               </div>
-            )}
+            </div>
           </div>
         </section>
 
