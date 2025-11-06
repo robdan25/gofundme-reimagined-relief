@@ -31,31 +31,30 @@ const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 async function generateWithClaude(): Promise<NewsArticle[]> {
   const apiKey = process.env.CLAUDE_API_KEY;
 
+  console.log("generateWithClaude called");
+  console.log("API Key present:", !!apiKey);
+  console.log("Available env keys:", Object.keys(process.env).filter(k => k.includes('CLAUDE') || k.includes('claude')));
+
   if (!apiKey) {
     console.error("CLAUDE_API_KEY environment variable not set");
     return [];
   }
 
   try {
-    console.log("Generating articles with Claude API...");
+    console.log("Calling Claude API with key starting with:", apiKey.substring(0, 20));
 
-    const prompt = `You are a professional news journalist. Generate 4 realistic, informative news articles about Hurricane Melissa relief efforts in Jamaica.
+    const prompt = `Generate 4 news articles about Hurricane Melissa relief in Jamaica as a JSON array. Each article should have: title, description (2-3 sentences), source (Jamaica Observer, Jamaica Star, Gleaner, or Jamaica News), and url (use https://example.com/article-slug).
 
-Focus on:
-1. Relief organizations' efforts
-2. Government support programs
-3. Community recovery initiatives
-4. Donation and aid opportunities
-
-For each article, provide JSON in this exact format (no markdown, just raw JSON):
-{
-  "title": "Article title",
-  "description": "2-3 sentence description of the article",
-  "source": "Jamaica Observer|Jamaica Star|Gleaner|Jamaica News",
-  "url": "https://example.com/article"
-}
-
-Generate EXACTLY 4 articles, separated by newlines. Do not include any other text, only the JSON objects.`;
+Return ONLY valid JSON array, no markdown or extra text:
+[
+  {
+    "title": "Article Title",
+    "description": "Description here",
+    "source": "Jamaica Observer",
+    "url": "https://example.com/article"
+  },
+  ...
+]`;
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -76,55 +75,54 @@ Generate EXACTLY 4 articles, separated by newlines. Do not include any other tex
       }),
     });
 
+    console.log("Claude API response status:", response.status);
+
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error(
-        `Claude API error ${response.status}:`,
-        errorData
-      );
+      const errorText = await response.text();
+      console.error(`Claude API error ${response.status}:`, errorText);
       return [];
     }
 
     const data: any = await response.json();
+    console.log("Claude response received");
 
     if (!data.content || !data.content[0] || !data.content[0].text) {
-      console.error("Unexpected Claude response structure:", data);
+      console.error("Invalid Claude response structure");
       return [];
     }
 
     const text = data.content[0].text;
-    console.log("Claude response:", text.substring(0, 200));
+    console.log("Claude text response length:", text.length);
+    console.log("First 500 chars:", text.substring(0, 500));
 
-    // Parse the JSON objects from the response
-    const articles: NewsArticle[] = [];
-    const jsonMatches = text.match(/\{[^}]+\}/g) || [];
-
-    for (let i = 0; i < jsonMatches.length && articles.length < 4; i++) {
-      try {
-        const parsed = JSON.parse(jsonMatches[i]);
-        articles.push({
-          id: `claude-${Date.now()}-${i}`,
-          title: parsed.title || "Untitled",
-          description: parsed.description || "",
-          source: parsed.source || "Jamaica News",
-          url: parsed.url || "#",
-          publishedDate: new Date(),
-          featured: i === 0,
-        });
-      } catch (e) {
-        console.warn(`Failed to parse JSON object ${i}:`, jsonMatches[i]);
-      }
-    }
-
-    if (articles.length > 0) {
-      console.log(`Successfully generated ${articles.length} articles`);
-      return articles;
-    } else {
-      console.warn("No valid articles parsed from Claude response");
+    // Extract JSON array from the response
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) {
+      console.error("No JSON array found in response");
       return [];
     }
+
+    const parsedArray = JSON.parse(jsonMatch[0]);
+
+    if (!Array.isArray(parsedArray)) {
+      console.error("Parsed content is not an array");
+      return [];
+    }
+
+    const articles: NewsArticle[] = parsedArray.slice(0, 4).map((item: any, index: number) => ({
+      id: `claude-${Date.now()}-${index}`,
+      title: item.title || "Untitled",
+      description: item.description || "",
+      source: item.source || "Jamaica News",
+      url: item.url || "#",
+      publishedDate: new Date(),
+      featured: index === 0,
+    }));
+
+    console.log(`Successfully generated ${articles.length} articles`);
+    return articles;
   } catch (error) {
-    console.error("Error calling Claude API:", error);
+    console.error("Error in generateWithClaude:", error);
     return [];
   }
 }
@@ -136,6 +134,8 @@ export default async (
   req: VercelRequest,
   res: VercelResponse
 ): Promise<void> => {
+  console.log("=== API /news called ===");
+
   // Enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -156,21 +156,23 @@ export default async (
     let articles: NewsArticle[] = [];
 
     if (isCached && cachedArticles) {
-      articles = cachedArticles;
       console.log("Returning cached articles");
+      articles = cachedArticles;
     } else {
       console.log("Generating fresh articles with Claude");
       articles = await generateWithClaude();
 
       if (articles.length > 0) {
+        console.log("Articles generated successfully, caching them");
         cachedArticles = articles;
         lastFetchTime = Date.now();
-        console.log("Articles cached successfully");
       } else {
-        console.warn("No articles generated, using fallback");
+        console.log("No articles generated, using fallback");
         articles = getFallbackArticles();
       }
     }
+
+    console.log(`Returning ${articles.length} articles`);
 
     res.status(200).json({
       articles,
@@ -178,9 +180,8 @@ export default async (
       cached: isCached,
     });
   } catch (error) {
-    console.error("News API error:", error);
+    console.error("=== Unhandled error in /news ===", error);
 
-    // Return fallback data on error
     res.status(200).json({
       articles: getFallbackArticles(),
       lastUpdated: new Date(),
