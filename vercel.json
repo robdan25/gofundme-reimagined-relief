@@ -1,9 +1,6 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "env": {
-    "VITE_NEWS_API_URL": "@vite_news_api_url"
-  },
   "functions": {
     "api/news.ts": {
       "memory": 1024,
