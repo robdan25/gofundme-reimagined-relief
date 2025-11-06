@@ -407,12 +407,18 @@ const DropOffAndShipping = () => {
 
           {/* UK Drop-Off Locations */}
           <TabsContent value="uk">
-            <DropoffLocations featured={false} />
+            <DropoffLocations
+              featured={false}
+              filterRegions={['London & South East', 'Midlands & North', 'Other Regions']}
+            />
           </TabsContent>
 
           {/* USA Drop-Off Locations */}
           <TabsContent value="usa">
-            <DropoffLocations featured={false} />
+            <DropoffLocations
+              featured={false}
+              filterRegions={['South Florida (Miami-Dade)', 'South Florida (Broward)', 'Central Florida (Orlando)', 'NYC (All Boroughs)', 'Brooklyn', 'Queens', 'Bronx', 'Manhattan', 'Atlanta (Georgia)']}
+            />
           </TabsContent>
         </Tabs>
 

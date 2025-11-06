@@ -22,13 +22,14 @@ import {
 interface DropoffLocationsProps {
   featured?: boolean;
   limit?: number;
+  filterRegions?: Region[];
 }
 
-export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsProps) => {
+export const DropoffLocations = ({ featured = false, limit, filterRegions }: DropoffLocationsProps) => {
   const [locations, setLocations] = useState<DropoffLocation[]>([]);
   const [filteredLocations, setFilteredLocations] = useState<DropoffLocation[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState<Region | 'all'>('all');
+  const [selectedRegion, setSelectedRegion] = useState<Region | 'all'>(filterRegions && filterRegions.length === 1 ? filterRegions[0] : 'all');
   const [selectedItemType, setSelectedItemType] = useState<ItemType | 'all'>('all');
 
   const itemTypeLabels: Record<ItemType, string> = {
@@ -66,6 +67,11 @@ export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsPr
       filtered = dropoffService.searchLocations(search);
     }
 
+    // Apply filterRegions restriction if provided
+    if (filterRegions && filterRegions.length > 0) {
+      filtered = filtered.filter((loc) => filterRegions.includes(loc.region));
+    }
+
     // Region filter
     if (region !== 'all') {
       filtered = filtered.filter((loc) => loc.region === region);
@@ -100,7 +106,9 @@ export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsPr
   };
 
   const regionCounts = dropoffService.getLocationCountByRegion();
-  const regions: (Region | 'all')[] = [
+
+  // Determine which regions to show in the filter buttons
+  const allRegions: (Region | 'all')[] = [
     'all',
     'London & South East',
     'Midlands & North',
@@ -115,6 +123,10 @@ export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsPr
     'Manhattan',
     'Atlanta (Georgia)',
   ];
+
+  const regions = filterRegions && filterRegions.length > 0
+    ? ['all' as const, ...filterRegions]
+    : allRegions;
 
   return (
     <div className="w-full space-y-8">
