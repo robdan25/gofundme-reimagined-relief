@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Home, Heart, GraduationCap, Stethoscope, Utensils, Briefcase } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
+  const navigate = useNavigate();
   const categories = [
     {
       icon: Home,
@@ -9,6 +11,7 @@ const Categories = () => {
       description: "Tents, tarps, cots",
       count: 34,
       color: "text-primary",
+      slug: "shelter-bedding",
     },
     {
       icon: Utensils,
@@ -16,6 +19,7 @@ const Categories = () => {
       description: "Non-perishables, water",
       count: 28,
       color: "text-secondary",
+      slug: "food-water",
     },
     {
       icon: Stethoscope,
@@ -23,6 +27,7 @@ const Categories = () => {
       description: "First-aid, medicines",
       count: 19,
       color: "text-destructive",
+      slug: "medical-health",
     },
     {
       icon: Heart,
@@ -30,6 +35,7 @@ const Categories = () => {
       description: "Soap, bleach, supplies",
       count: 22,
       color: "text-success",
+      slug: "sanitation-cleaning",
     },
     {
       icon: Briefcase,
@@ -37,6 +43,7 @@ const Categories = () => {
       description: "Shovels, gloves, tools",
       count: 15,
       color: "text-warning",
+      slug: "tools-debris",
     },
     {
       icon: GraduationCap,
@@ -44,6 +51,7 @@ const Categories = () => {
       description: "Books, supplies",
       count: 31,
       color: "text-primary",
+      slug: "school-community",
     },
   ];
 
@@ -63,15 +71,20 @@ const Categories = () => {
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <Card
+              <button
                 key={index}
-                className="p-6 text-center hover:shadow-hover transition-all duration-300 cursor-pointer group border-border bg-card"
+                onClick={() => navigate(`/official-relief-lists?category=${category.slug}`)}
+                className="h-full text-left"
               >
-                <Icon className={`w-10 h-10 mx-auto mb-3 ${category.color} group-hover:scale-110 transition-transform`} />
-                <h3 className="font-semibold text-card-foreground mb-1">{category.name}</h3>
-                <p className="text-xs text-muted-foreground mb-2">{category.description}</p>
-                <p className="text-sm text-muted-foreground">{category.count} drives</p>
-              </Card>
+                <Card
+                  className="p-6 text-center hover:shadow-hover transition-all duration-300 cursor-pointer group border-border bg-card h-full"
+                >
+                  <Icon className={`w-10 h-10 mx-auto mb-3 ${category.color} group-hover:scale-110 transition-transform`} />
+                  <h3 className="font-semibold text-card-foreground mb-1">{category.name}</h3>
+                  <p className="text-xs text-muted-foreground mb-2">{category.description}</p>
+                  <p className="text-sm text-muted-foreground">{category.count} drives</p>
+                </Card>
+              </button>
             );
           })}
         </div>

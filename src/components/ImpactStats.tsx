@@ -5,14 +5,14 @@ const ImpactStats = () => {
   const stats = [
     {
       icon: DollarSign,
-      value: "850+",
+      value: "15+",
       label: "Barrels & Pallets",
       description: "Shipped to Jamaica",
       color: "text-primary",
     },
     {
       icon: Users,
-      value: "15,427",
+      value: "350+",
       label: "Relief Items",
       description: "Collected and distributed",
       color: "text-secondary",
@@ -26,7 +26,7 @@ const ImpactStats = () => {
     },
     {
       icon: TrendingUp,
-      value: "45",
+      value: "4",
       label: "Active Drives",
       description: "Currently collecting supplies",
       color: "text-warning",

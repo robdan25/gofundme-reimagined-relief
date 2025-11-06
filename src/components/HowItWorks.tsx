@@ -7,6 +7,8 @@ const HowItWorks = () => {
       icon: Search,
       title: "Check Approved Items",
       description: "Browse GOJ and ODPEM lists to see exactly what's needed and duty-waived.",
+      link: "https://supportjamaica.gov.jm/needs",
+      linkText: "View Needs",
     },
     {
       icon: CreditCard,
@@ -50,7 +52,17 @@ const HowItWorks = () => {
                     {index + 1}
                   </div>
                   <h3 className="text-xl font-semibold text-card-foreground mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.description}</p>
+                  <p className="text-muted-foreground mb-4">{step.description}</p>
+                  {step.link && (
+                    <a
+                      href={step.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-primary hover:underline font-medium text-sm"
+                    >
+                      {step.linkText || "Learn More"}
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             );

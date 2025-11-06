@@ -1,4 +1,5 @@
-import { Heart, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const footerLinks = {
@@ -9,10 +10,10 @@ const Footer = () => {
       { label: "Partners", href: "#partners" },
     ],
     support: [
-      { label: "Help Center", href: "#" },
-      { label: "Safety & Security", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
+      { label: "Help Center", href: "/help-center" },
+      { label: "Safety & Security", href: "/safety" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
     drives: [
       { label: "Start a Drive", href: "#" },
@@ -21,10 +22,10 @@ const Footer = () => {
       { label: "Approved Items List", href: "#" },
     ],
     contact: [
-      { label: "Contact Us", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Volunteer", href: "#" },
-      { label: "Report Issue", href: "#" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Press & Media", href: "/press" },
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Report Issue", href: "/report-issue" },
     ],
   };
 
@@ -33,12 +34,12 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <Heart className="w-8 h-8 text-primary fill-primary" />
-              <div>
-                <h3 className="text-lg font-bold text-foreground">Unbiased Relief</h3>
-                <p className="text-xs text-muted-foreground">Hurricane Support</p>
-              </div>
+            <div className="mb-4">
+              <img
+                src="https://unbiasedrelief.org/Images/UnbiasedReliefSupport.png"
+                alt="Unbiased Relief Support"
+                className="h-9 object-contain mb-2"
+              />
             </div>
             <p className="text-sm text-muted-foreground mb-4">
               Connecting donors with approved relief item drives to help Jamaica rebuild after Hurricane Melissa.
@@ -77,9 +78,15 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.support.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -115,7 +122,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 Unbiased Relief. All rights reserved.
+              © 2025 Unbiased Relief. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
               All relief supplies are verified and delivered directly to communities in need.

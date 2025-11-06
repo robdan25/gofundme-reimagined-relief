@@ -1,47 +1,9 @@
+import { Link } from "react-router-dom";
 import DriveCard from "./DriveCard";
-import driveHygiene from "@/assets/drive-hygiene-kits.jpg";
-import driveSchool from "@/assets/drive-school-supplies.jpg";
-import driveMedical from "@/assets/drive-medical-supplies.jpg";
+import { getFeaturedCampaigns } from "@/data/campaigns";
 
 const FeaturedCampaigns = () => {
-  const drives = [
-    {
-      image: driveHygiene,
-      title: "Hygiene & Sanitation Supplies for Port Antonio",
-      organizer: "Jamaica Red Cross",
-      description: "Collecting soap, toothpaste, sanitary products, diapers, and cleaning supplies for 200+ families who lost their homes in Port Antonio.",
-      barrelsPacked: 42,
-      goal: 60,
-      itemsCollected: 1247,
-      daysLeft: 18,
-      verified: true,
-      urgent: true,
-    },
-    {
-      image: driveSchool,
-      title: "School Supplies for St. Mary Students",
-      organizer: "Ministry of Education Jamaica",
-      description: "Gathering books, notebooks, pencils, backpacks, and educational materials for 450 students whose school was destroyed by Hurricane Melissa.",
-      barrelsPacked: 28,
-      goal: 35,
-      itemsCollected: 892,
-      daysLeft: 25,
-      verified: true,
-      urgent: false,
-    },
-    {
-      image: driveMedical,
-      title: "Medical Supplies for Rural Clinics",
-      organizer: "Jamaica Medical Relief Foundation",
-      description: "Collecting bandages, first-aid kits, over-the-counter medicines, and medical equipment for rural communities affected by the hurricane.",
-      barrelsPacked: 18,
-      goal: 30,
-      itemsCollected: 534,
-      daysLeft: 12,
-      verified: true,
-      urgent: true,
-    },
-  ];
+  const drives = getFeaturedCampaigns();
 
   return (
     <section id="drives" className="py-16 bg-background">
@@ -62,9 +24,9 @@ const FeaturedCampaigns = () => {
         </div>
         
         <div className="text-center mt-10">
-          <button className="text-primary hover:text-primary-hover font-medium text-lg hover:underline">
+          <Link to="/official-relief-lists" className="text-primary hover:text-primary-hover font-medium text-lg hover:underline inline-block">
             View All Drives →
-          </button>
+          </Link>
         </div>
       </div>
     </section>

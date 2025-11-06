@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-relief-supplies.jpg";
 
 const Hero = () => {
@@ -28,27 +29,31 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-primary hover:bg-primary-hover text-white text-lg px-8">
-              View What to Donate
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-white text-lg px-8">
-              Find a Drop-Off Location
-              <Heart className="w-5 h-5 ml-2" />
-            </Button>
+            <Link to="/what-to-donate">
+              <Button size="lg" className="bg-primary hover:bg-primary-hover text-white text-lg px-8 w-full sm:w-auto">
+                View What to Donate
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            <Link to="/drop-off-and-shipping">
+              <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-white text-lg px-8 w-full sm:w-auto">
+                Find a Drop-Off Location
+                <Heart className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
           </div>
           
           <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/20">
             <div>
-              <div className="text-3xl font-bold text-white mb-1">850+</div>
+              <div className="text-3xl font-bold text-white mb-1">15+</div>
               <div className="text-sm text-white/80">Barrels Shipped</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-white mb-1">15K+</div>
+              <div className="text-3xl font-bold text-white mb-1">350+</div>
               <div className="text-sm text-white/80">Items Collected</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-white mb-1">45</div>
+              <div className="text-3xl font-bold text-white mb-1">4</div>
               <div className="text-sm text-white/80">Active Drives</div>
             </div>
           </div>
