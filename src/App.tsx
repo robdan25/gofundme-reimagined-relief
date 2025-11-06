@@ -24,6 +24,7 @@ import News from "./pages/News";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import { Analytics } from "./components/Analytics";
+import { CurrencyProvider } from "./context/CurrencyContext";
 
 const queryClient = new QueryClient();
 
@@ -31,10 +32,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Analytics />
+        <CurrencyProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Analytics />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/what-to-donate" element={<WhatToDonate />} />
@@ -57,7 +59,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatBot />
-        </BrowserRouter>
+          </BrowserRouter>
+        </CurrencyProvider>
       </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>

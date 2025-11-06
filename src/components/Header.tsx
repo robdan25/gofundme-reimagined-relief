@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CurrencySelector from "./CurrencySelector";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +38,7 @@ const Header = () => {
             <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </Link>
+            <CurrencySelector />
             <Link to="/start-drive">
               <Button size="sm" className="bg-primary hover:bg-primary-hover text-white">
                 Start a Drive
