@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MapPin, Truck, Package } from "lucide-react";
+import { MapPin, Truck, Package, Globe } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DropOffPartnersStrip from "@/components/DropOffPartnersStrip";
 import LocationMap from "@/components/LocationMap";
+import DropoffLocations from "@/components/DropoffLocations";
 
 const DropOffAndShipping = () => {
   const [selectedLocation, setSelectedLocation] = useState<{
@@ -163,10 +166,19 @@ const DropOffAndShipping = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <Helmet>
+        <title>Drop-Off Locations | Relief Supplies | Unbiased Relief</title>
+        <meta
+          name="description"
+          content="Find drop-off locations in UK, Canada, and online to donate Hurricane Melissa relief supplies. Non-perishable food, hygiene products, baby supplies, medical kits, and bedding accepted."
+        />
+      </Helmet>
 
-      {/* Hero Image Section */}
+      <div className="min-h-screen bg-background">
+        <Header />
+
+        {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
           src="https://unbiasedrelief.org/Images/dropoff.png"
@@ -209,12 +221,32 @@ const DropOffAndShipping = () => {
             Drop-Off & Shipping
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            We make it easy to get your relief items into the hands of Jamaican communities. Whether you're packing barrels in Toronto or shipping from across North America, these options help your donations reach the right places.
+            We make it easy to get your relief items into the hands of Jamaican communities. Drop-off locations are available across Canada and the UK. These options help your donations reach the right places.
           </p>
         </section>
 
-        {/* Official Drop-Off Locations Across Canada */}
-        <section className="mb-16">
+        {/* Tabbed Interface for Regions */}
+        <Tabs defaultValue="uk" className="mb-16">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="uk" className="gap-2">
+              <Globe className="w-4 h-4" />
+              UK Locations
+            </TabsTrigger>
+            <TabsTrigger value="canada" className="gap-2">
+              <Globe className="w-4 h-4" />
+              Canada Locations
+            </TabsTrigger>
+          </TabsList>
+
+          {/* UK Drop-Off Locations */}
+          <TabsContent value="uk">
+            <DropoffLocations featured={false} />
+          </TabsContent>
+
+          {/* Canada Drop-Off Locations */}
+          <TabsContent value="canada">
+            {/* Official Drop-Off Locations Across Canada */}
+            <section className="mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-2">
             Official Drop-Off Locations Across Canada
           </h2>
@@ -371,7 +403,9 @@ const DropOffAndShipping = () => {
               Please contact the location directly to confirm drop-off availability and hours before visiting.
             </AlertDescription>
           </Alert>
-        </section>
+            </section>
+          </TabsContent>
+        </Tabs>
 
         {/* Shipping & Logistics */}
         <section className="mb-16">
@@ -515,6 +549,7 @@ const DropOffAndShipping = () => {
         />
       )}
     </div>
+    </>
   );
 };
 
