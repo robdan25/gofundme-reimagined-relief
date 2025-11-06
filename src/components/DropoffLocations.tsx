@@ -113,6 +113,7 @@ export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsPr
     'Queens',
     'Bronx',
     'Manhattan',
+    'Atlanta (Georgia)',
   ];
 
   return (

@@ -1,6 +1,6 @@
 // Drop-off Locations Service - Manages relief supply collection points
 
-export type Region = 'London & South East' | 'Midlands & North' | 'Other Regions' | 'South Florida (Miami-Dade)' | 'South Florida (Broward)' | 'Central Florida (Orlando)' | 'NYC (All Boroughs)' | 'Brooklyn' | 'Queens' | 'Bronx' | 'Manhattan';
+export type Region = 'London & South East' | 'Midlands & North' | 'Other Regions' | 'South Florida (Miami-Dade)' | 'South Florida (Broward)' | 'Central Florida (Orlando)' | 'NYC (All Boroughs)' | 'Brooklyn' | 'Queens' | 'Bronx' | 'Manhattan' | 'Atlanta (Georgia)';
 export type ItemType = 'non-perishable-food' | 'hygiene' | 'baby-supplies' | 'medical' | 'bedding';
 
 export interface DropoffLocation {
@@ -536,6 +536,207 @@ class DropoffService {
       hours: 'Mon-Fri, 11:00 a.m. – 6:00 p.m.',
       acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
     },
+
+    // USA - Atlanta (Georgia) - Shipping & Logistics
+    {
+      id: 'caribbean-intl-shipping',
+      name: 'Caribbean International Shipping Services',
+      address: '3048 Miller Road, Stonecrest, GA 30038',
+      region: 'Atlanta (Georgia)',
+      phone: '(770) 323-1111',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Sharon Barnwell · Specialized shipping services',
+      callAhead: true,
+    },
+    {
+      id: 'sa-laparkan-shipping',
+      name: 'S & A Laparkan Shipping',
+      address: '5365 Dividend Drive, Decatur, GA 30035',
+      region: 'Atlanta (Georgia)',
+      phone: '(770) 322-7922 or (770) 322-7923',
+      hours: 'Mon–Fri (9:30 a.m. – 5:00 p.m.), Sat (9:00 a.m. – 1:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Seelochney Mohamed · Full-service shipping',
+      callAhead: true,
+    },
+    {
+      id: 'delta-air-lines-atlanta',
+      name: 'Delta Air Lines (Atlanta)',
+      address: '1777 Harvard Avenue, College Park, GA 30337',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Ms. E. Rashford · Air freight options',
+      callAhead: true,
+    },
+
+    // USA - Atlanta (Georgia) - Community Centers & Churches
+    {
+      id: 'word-of-life-intl-church',
+      name: 'Word of Life International Church of God',
+      address: '4881 Lawrenceville Hwy, Tucker, GA 30084',
+      region: 'Atlanta (Georgia)',
+      phone: '(678) 937-9897',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Pastor Kenneth Hanson Jr.',
+    },
+    {
+      id: 'caribbean-life-tv',
+      name: 'Caribbean Life TV',
+      address: '414 North Hairston Road, Suite 300, Stone Mountain, GA 30083',
+      region: 'Atlanta (Georgia)',
+      phone: '(404) 218-1234',
+      hours: 'Mon–Fri (1:00 p.m. – 8:00 p.m.), Sat (9:00 a.m. – 3:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Lawrence Prescott',
+    },
+    {
+      id: 'berean-christian-gwinnett',
+      name: 'Berean Christian Church (Gwinnett)',
+      address: '1465 Highpoint Rd, Snellville, GA 30078',
+      region: 'Atlanta (Georgia)',
+      hours: '10:00 a.m. – 4:30 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Bro. David Cuffie',
+    },
+    {
+      id: 'berean-christian-dekalb',
+      name: 'Berean Christian Church (Dekalb)',
+      address: '2201 Young Road, Stone Mountain, GA 30088',
+      region: 'Atlanta (Georgia)',
+      phone: '',
+      hours: 'Mon–Fri (9:00 a.m. – 5:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Sis. Donna Bush',
+    },
+    {
+      id: 'berean-christian-henry',
+      name: 'Berean Christian Church (Henry)',
+      address: '171 Collier Road, Stockbridge, GA 30281',
+      region: 'Atlanta (Georgia)',
+      hours: 'Mon–Fri (9:00 a.m. – 5:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Min. Darrell Barrett',
+    },
+    {
+      id: 'tara-events-center',
+      name: 'Tara Events Center',
+      address: '6340 GA-138, Jonesboro, GA 30236',
+      region: 'Atlanta (Georgia)',
+      hours: 'Mon–Fri (8:30 a.m. – 10:30 a.m. & 4:30 p.m. – 7:30 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Contact: Chris Scott',
+    },
+
+    // USA - Atlanta (Georgia) - Restaurants & Caribbean Businesses
+    {
+      id: 'irie-mon-cafe',
+      name: 'Irie Mon Café',
+      address: '5975 Peachtree Parkway, #2, Norcross, GA 30092',
+      region: 'Atlanta (Georgia)',
+      hours: '11:00 a.m. – 10:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+    {
+      id: 'kool-runnings-restaurant',
+      name: 'Kool Runnings Restaurant',
+      address: '5450 Peachtree Pkwy, 8D, Peachtree Corners, GA 30092',
+      region: 'Atlanta (Georgia)',
+      phone: '',
+      hours: 'Mon–Sat (12:00 p.m. – 7:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Marcia Reid',
+    },
+    {
+      id: 'jays-caribbean-cuisine',
+      name: 'Jay\'s Caribbean Cuisine',
+      address: '150 Hurricane Shoals Rd, Lawrenceville, GA',
+      region: 'Atlanta (Georgia)',
+      hours: 'Tues–Sat (11:00 a.m. – 7:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Jackie or Liz',
+    },
+    {
+      id: 'kingston-30',
+      name: 'Kingston 30',
+      address: '455 Grayson Hwy, Suite 128, Lawrenceville, GA',
+      region: 'Atlanta (Georgia)',
+      hours: 'Mon–Fri (11:00 a.m. – 11:00 p.m.), Sat (11:00 a.m. – 7:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Desmond Nembhard',
+    },
+    {
+      id: 'royal-caribbean-bakery',
+      name: 'Royal Caribbean Bakery',
+      address: '4859 Memorial Dr, Stone Mountain, GA 30083',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies'],
+      notes: 'Contact: Mr. Chin',
+    },
+    {
+      id: 'sun-city-caribbean-restaurant',
+      name: 'Sun City Caribbean & American Restaurant',
+      address: '6201 Memorial Dr, Stone Mountain, GA 30083',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Nzingha Reid',
+    },
+    {
+      id: 'queen-jamaican-cuisine',
+      name: 'Queen Jamaican Cuisine',
+      address: '1005 Brentwood Parkway, Stockbridge, GA 30281',
+      region: 'Atlanta (Georgia)',
+      hours: 'Mon–Sat (11:00 a.m. – 8:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Jennifer',
+    },
+    {
+      id: 'fern-gully-jamaican-cafe',
+      name: 'Fern Gully Jamaican Café',
+      address: '2756 S Main St, Kennesaw, GA 30144',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+    {
+      id: 'ns-caribbean-market',
+      name: 'N and S Caribbean Market',
+      address: '685 GA-3, Hampton, GA 30228',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies'],
+    },
+    {
+      id: 'select-intl-farmers-market',
+      name: 'Select International Farmers Market',
+      address: '8639 Tara Blvd, Jonesboro, GA 30236',
+      region: 'Atlanta (Georgia)',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+    {
+      id: 'center-for-pain-rehab',
+      name: 'Center For Pain and Rehab Medicine',
+      address: '240 Medical Blvd, Stockbridge, GA 30281',
+      region: 'Atlanta (Georgia)',
+      phone: '',
+      hours: 'Mon–Fri (8:00 a.m. – 5:30 p.m.)',
+      acceptedItems: ['medical', 'hygiene', 'baby-supplies'],
+      notes: 'Contact: Dr. Maxine Osbourne Foster',
+    },
+    {
+      id: 'gmr-auto-care-center',
+      name: 'GMR Auto Care Center',
+      address: '3120 Main St W, Suite B, Snellville, GA',
+      region: 'Atlanta (Georgia)',
+      hours: 'Mon–Fri (9:00 a.m. – 6:00 p.m.), Sat (9:00 a.m. – 1:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+      notes: 'Contact: Lisa Royes',
+    },
   ];
 
   /**
@@ -594,6 +795,7 @@ class DropoffService {
       'Queens',
       'Bronx',
       'Manhattan',
+      'Atlanta (Georgia)',
     ];
   }
 
@@ -613,6 +815,7 @@ class DropoffService {
       'Queens': this.locations.filter((l) => l.region === 'Queens').length,
       'Bronx': this.locations.filter((l) => l.region === 'Bronx').length,
       'Manhattan': this.locations.filter((l) => l.region === 'Manhattan').length,
+      'Atlanta (Georgia)': this.locations.filter((l) => l.region === 'Atlanta (Georgia)').length,
     };
   }
 }

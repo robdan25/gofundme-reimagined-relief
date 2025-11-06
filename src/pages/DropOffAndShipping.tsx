@@ -221,16 +221,20 @@ const DropOffAndShipping = () => {
             Drop-Off & Shipping
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            We make it easy to get your relief items into the hands of Jamaican communities. Drop-off locations are available across Canada and the UK. These options help your donations reach the right places.
+            We make it easy to get your relief items into the hands of Jamaican communities. Drop-off locations are available across Canada, the UK, and the USA. These options help your donations reach the right places.
           </p>
         </section>
 
         {/* Tabbed Interface for Regions */}
         <Tabs defaultValue="uk" className="mb-16">
-          <TabsList className="grid w-full grid-cols-2 mb-8">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="uk" className="gap-2">
               <Globe className="w-4 h-4" />
               UK Locations
+            </TabsTrigger>
+            <TabsTrigger value="usa" className="gap-2">
+              <Globe className="w-4 h-4" />
+              USA Locations
             </TabsTrigger>
             <TabsTrigger value="canada" className="gap-2">
               <Globe className="w-4 h-4" />
@@ -240,6 +244,11 @@ const DropOffAndShipping = () => {
 
           {/* UK Drop-Off Locations */}
           <TabsContent value="uk">
+            <DropoffLocations featured={false} />
+          </TabsContent>
+
+          {/* USA Drop-Off Locations */}
+          <TabsContent value="usa">
             <DropoffLocations featured={false} />
           </TabsContent>
 
