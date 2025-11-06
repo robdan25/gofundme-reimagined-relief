@@ -280,7 +280,7 @@ export default async (
           description:
             "Get the latest updates on Hurricane Melissa relief and recovery efforts across Jamaica.",
           source: "Jamaica News",
-          url: "https://unbiasedrelief.org/news",
+          url: "#",
           publishedDate: new Date(),
           featured: true,
         },
@@ -304,7 +304,7 @@ export default async (
           description:
             "We're working to bring you the latest Hurricane Melissa news. Please try again shortly.",
           source: "Jamaica News",
-          url: "https://unbiasedrelief.org/news",
+          url: "#",
           publishedDate: new Date(),
           featured: true,
         },
