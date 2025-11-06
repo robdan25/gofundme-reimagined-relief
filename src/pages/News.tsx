@@ -3,16 +3,19 @@ import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Calendar, RefreshCw } from 'lucide-react';
+import { Calendar, RefreshCw } from 'lucide-react';
 import { newsService, NewsArticle } from '@/services/newsService';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ArticleModal from '@/components/ArticleModal';
 
 const News = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const loadNews = async () => {
     try {
@@ -37,6 +40,11 @@ const News = () => {
     const interval = setInterval(loadNews, 15 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleOpenArticle = (article: NewsArticle) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
 
   const featuredArticle = articles[0];
   const recentArticles = articles.slice(1);
@@ -175,17 +183,9 @@ const News = () => {
 
                             <Button
                               className="w-full md:w-auto bg-primary hover:bg-primary-hover text-white"
-                              asChild
+                              onClick={() => handleOpenArticle(featuredArticle)}
                             >
-                              <a
-                                href={featuredArticle.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2"
-                              >
-                                Read Full Article
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
+                              Read Full Article
                             </Button>
                           </div>
                         </div>
@@ -257,17 +257,9 @@ const News = () => {
                             <Button
                               variant="default"
                               className="w-full bg-primary hover:bg-primary-hover text-white"
-                              asChild
+                              onClick={() => handleOpenArticle(article)}
                             >
-                              <a
-                                href={article.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2"
-                              >
-                                Read More
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
+                              Read More
                             </Button>
                           </CardContent>
                         </Card>
@@ -296,6 +288,12 @@ const News = () => {
       </main>
 
       <Footer />
+
+      <ArticleModal
+        article={selectedArticle}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 };

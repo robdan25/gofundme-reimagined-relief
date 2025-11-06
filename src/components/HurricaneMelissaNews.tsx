@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { newsService, NewsArticle } from '@/services/newsService';
+import ArticleModal from './ArticleModal';
 
 interface HurricaneMelissaNewsProps {
   limit?: number;
@@ -17,6 +18,8 @@ export const HurricaneMelissaNews = ({
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -93,73 +96,78 @@ export const HurricaneMelissaNews = ({
     );
   }
 
+  const handleOpenArticle = (article: NewsArticle) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className={featured ? '' : 'grid md:grid-cols-2 lg:grid-cols-3 gap-6'}>
-      {articles.map((article) => (
-        <Card
-          key={article.id}
-          className={`overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col ${
-            featured ? 'lg:col-span-2' : ''
-          }`}
-        >
-          {article.imageUrl && (
-            <div className="relative w-full h-48 overflow-hidden bg-muted">
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute top-3 left-3">
-                <Badge variant="secondary" className="bg-primary text-white">
-                  {article.source}
-                </Badge>
+    <>
+      <div className={featured ? '' : 'grid md:grid-cols-2 lg:grid-cols-3 gap-6'}>
+        {articles.map((article) => (
+          <Card
+            key={article.id}
+            className={`overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer ${
+              featured ? 'lg:col-span-2' : ''
+            }`}
+          >
+            {article.imageUrl && (
+              <div className="relative w-full h-48 overflow-hidden bg-muted">
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 left-3">
+                  <Badge variant="secondary" className="bg-primary text-white">
+                    {article.source}
+                  </Badge>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <CardHeader className={article.imageUrl ? '' : 'pb-2'}>
-            <h3 className="text-lg font-semibold line-clamp-2 hover:text-primary transition-colors">
-              {article.title}
-            </h3>
-          </CardHeader>
+            <CardHeader className={article.imageUrl ? '' : 'pb-2'}>
+              <h3 className="text-lg font-semibold line-clamp-2 hover:text-primary transition-colors">
+                {article.title}
+              </h3>
+            </CardHeader>
 
-          <CardContent className="flex-1">
-            <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-              {article.description}
-            </p>
+            <CardContent className="flex-1">
+              <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                {article.description}
+              </p>
 
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              <time dateTime={new Date(article.publishedDate).toISOString()}>
-                {new Date(article.publishedDate).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </time>
-            </div>
-          </CardContent>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Calendar className="w-4 h-4" />
+                <time dateTime={new Date(article.publishedDate).toISOString()}>
+                  {new Date(article.publishedDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </time>
+              </div>
+            </CardContent>
 
-          <CardFooter>
-            <Button
-              variant="default"
-              className="w-full bg-primary hover:bg-primary-hover text-white"
-              asChild
-            >
-              <a
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2"
+            <CardFooter>
+              <Button
+                variant="default"
+                className="w-full bg-primary hover:bg-primary-hover text-white"
+                onClick={() => handleOpenArticle(article)}
               >
                 Read Full Article
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
-    </div>
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+
+      <ArticleModal
+        article={selectedArticle}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 
