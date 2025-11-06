@@ -16,8 +16,8 @@ class ScheduledNewsPoster {
   private lastPostTime: Date | null = null;
   private config: ScheduledNewsConfig = {
     enabled: true,
-    intervalHours: 12, // Default: every 12 hours (2x per day)
-    maxArticlesPerPost: 8,
+    intervalHours: 6, // Default: every 6 hours (4x per day)
+    maxArticlesPerPost: 6,
     autoStartOnPageLoad: true,
   };
 
@@ -48,7 +48,7 @@ class ScheduledNewsPoster {
       return;
     }
 
-    console.log(`Starting news scheduler - every ${this.config.intervalHours} hours`);
+    console.log(`🔄 Starting news scheduler - every ${this.config.intervalHours} hours (${24 / this.config.intervalHours} posts per day)`);
 
     // Post news immediately
     this.postNews();
@@ -94,7 +94,7 @@ class ScheduledNewsPoster {
       // Update last post time
       this.lastPostTime = new Date();
 
-      console.log(`✅ Posted ${articles.length} new articles at ${this.lastPostTime.toLocaleString('en-JM')}`);
+      console.log(`✅ Posted ${articles.length} Hurricane Melissa news articles at ${this.lastPostTime.toLocaleString('en-JM')} Jamaica Time`);
     } catch (error) {
       console.error('Failed to post news:', error);
     }
