@@ -18,12 +18,12 @@ export interface NewsResponse {
 
 const CACHE_KEY = 'hurricane_melissa_news';
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes for fast updates
-const API_ENDPOINT = import.meta.env.VITE_NEWS_API_URL || '/api/news';
+const NEWS_DATA_URL = '/news-data.json';
 
 class NewsService {
   /**
-   * Fetch news articles from serverless backend
-   * Falls back to cached data if API fails
+   * Fetch news articles from static JSON file
+   * Falls back to cached data if fetch fails
    */
   async fetchNews(): Promise<NewsArticle[]> {
     try {
@@ -32,7 +32,7 @@ class NewsService {
         return cached;
       }
 
-      const response = await fetch(API_ENDPOINT, {
+      const response = await fetch(NEWS_DATA_URL, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -40,11 +40,14 @@ class NewsService {
       });
 
       if (!response.ok) {
-        throw new Error(`API returned ${response.status}`);
+        throw new Error(`Failed to fetch news data: ${response.status}`);
       }
 
-      const data: NewsResponse = await response.json();
-      const articles = data.articles || [];
+      const data: any = await response.json();
+      const articles = (data.articles || []).map((article: any) => ({
+        ...article,
+        publishedDate: new Date(article.publishedDate),
+      }));
 
       // Cache the fresh data
       this.saveToCache(articles);
@@ -59,7 +62,7 @@ class NewsService {
         return cached;
       }
 
-      // Return empty array with fallback message
+      // Return fallback articles
       return this.getFallbackArticles();
     }
   }
