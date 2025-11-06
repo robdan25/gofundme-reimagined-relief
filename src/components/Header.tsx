@@ -34,6 +34,9 @@ const Header = () => {
             <Link to="/events" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Events
             </Link>
+            <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Stories
+            </Link>
             <Link to="/partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Partners
             </Link>
@@ -74,6 +77,9 @@ const Header = () => {
               </Link>
               <Link to="/events" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Events
+              </Link>
+              <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Stories
               </Link>
               <Link to="/partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Partners
