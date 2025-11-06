@@ -226,8 +226,12 @@ const DropOffAndShipping = () => {
         </section>
 
         {/* Tabbed Interface for Regions */}
-        <Tabs defaultValue="uk" className="mb-16">
+        <Tabs defaultValue="canada" className="mb-16">
           <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="canada" className="gap-2">
+              <Globe className="w-4 h-4" />
+              Canada Locations
+            </TabsTrigger>
             <TabsTrigger value="uk" className="gap-2">
               <Globe className="w-4 h-4" />
               UK Locations
@@ -236,21 +240,7 @@ const DropOffAndShipping = () => {
               <Globe className="w-4 h-4" />
               USA Locations
             </TabsTrigger>
-            <TabsTrigger value="canada" className="gap-2">
-              <Globe className="w-4 h-4" />
-              Canada Locations
-            </TabsTrigger>
           </TabsList>
-
-          {/* UK Drop-Off Locations */}
-          <TabsContent value="uk">
-            <DropoffLocations featured={false} />
-          </TabsContent>
-
-          {/* USA Drop-Off Locations */}
-          <TabsContent value="usa">
-            <DropoffLocations featured={false} />
-          </TabsContent>
 
           {/* Canada Drop-Off Locations */}
           <TabsContent value="canada">
@@ -413,6 +403,16 @@ const DropOffAndShipping = () => {
             </AlertDescription>
           </Alert>
             </section>
+          </TabsContent>
+
+          {/* UK Drop-Off Locations */}
+          <TabsContent value="uk">
+            <DropoffLocations featured={false} />
+          </TabsContent>
+
+          {/* USA Drop-Off Locations */}
+          <TabsContent value="usa">
+            <DropoffLocations featured={false} />
           </TabsContent>
         </Tabs>
 
