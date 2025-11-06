@@ -28,7 +28,7 @@ class TestimonialsService {
       date: new Date('2025-11-04'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1559839734033-6461ffad8d80?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-2',
@@ -41,7 +41,7 @@ class TestimonialsService {
       date: new Date('2025-11-03'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1507009073585-d4a6d5e43c0f?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1546182990-dffedfb884d7?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-3',
@@ -53,7 +53,7 @@ class TestimonialsService {
       date: new Date('2025-11-02'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80',
     },
     {
       id: 'testimonial-4',
@@ -66,7 +66,7 @@ class TestimonialsService {
       date: new Date('2025-11-01'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-5',
@@ -78,7 +78,7 @@ class TestimonialsService {
       date: new Date('2025-10-31'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1559839734033-6461ffad8d80?w=200&h=200&fit=crop',
     },
     {
       id: 'testimonial-6',
@@ -90,7 +90,7 @@ class TestimonialsService {
       date: new Date('2025-10-30'),
       rating: 5,
       verified: true,
-      avatar: 'https://images.unsplash.com/photo-1516003881520-1b8fa95b9f6e?w=200&h=200&fit=crop',
+      avatar: 'https://images.unsplash.com/photo-1546182990-dffedfb884d7?w=200&h=200&fit=crop',
     },
   ];
 
