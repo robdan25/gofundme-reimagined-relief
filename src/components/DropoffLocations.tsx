@@ -100,7 +100,20 @@ export const DropoffLocations = ({ featured = false, limit }: DropoffLocationsPr
   };
 
   const regionCounts = dropoffService.getLocationCountByRegion();
-  const regions: (Region | 'all')[] = ['all', 'London & South East', 'Midlands & North', 'Other Regions'];
+  const regions: (Region | 'all')[] = [
+    'all',
+    'London & South East',
+    'Midlands & North',
+    'Other Regions',
+    'South Florida (Miami-Dade)',
+    'South Florida (Broward)',
+    'Central Florida (Orlando)',
+    'NYC (All Boroughs)',
+    'Brooklyn',
+    'Queens',
+    'Bronx',
+    'Manhattan',
+  ];
 
   return (
     <div className="w-full space-y-8">

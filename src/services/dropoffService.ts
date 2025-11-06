@@ -1,6 +1,6 @@
 // Drop-off Locations Service - Manages relief supply collection points
 
-export type Region = 'London & South East' | 'Midlands & North' | 'Other Regions' | 'South Florida (Miami-Dade)' | 'South Florida (Broward)' | 'Central Florida (Orlando)';
+export type Region = 'London & South East' | 'Midlands & North' | 'Other Regions' | 'South Florida (Miami-Dade)' | 'South Florida (Broward)' | 'Central Florida (Orlando)' | 'NYC (All Boroughs)' | 'Brooklyn' | 'Queens' | 'Bronx' | 'Manhattan';
 export type ItemType = 'non-perishable-food' | 'hygiene' | 'baby-supplies' | 'medical' | 'bedding';
 
 export interface DropoffLocation {
@@ -331,6 +331,211 @@ class DropoffService {
       hours: 'Contact for hours',
       acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
     },
+
+    // NYC - All Boroughs
+    {
+      id: 'nypd-all-boroughs',
+      name: 'All NYPD Precincts',
+      address: 'Multiple locations across all NYC boroughs',
+      region: 'NYC (All Boroughs)',
+      hours: '24/7 (Open 24 hours)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Drop-off donations at any local NYPD precinct 24/7',
+    },
+
+    // NYC - Brooklyn
+    {
+      id: 'brooklyn-borough-hall',
+      name: 'Brooklyn Borough Hall',
+      address: '209 Joralemon St, Brooklyn, NY 11201',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri (during business hours)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'cunningham-district-office',
+      name: 'NYS Assemblyman Brian Cunningham\'s District Office',
+      address: '249 Empire Blvd, Brooklyn, NY 11225',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri, 10:00 a.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'chandler-waterman-office',
+      name: 'NYS Assemblywoman Monique Chandler-Waterman\'s District Office',
+      address: '903 Utica Avenue, Brooklyn, NY 11203',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri, 10:00 a.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'hibiscus-brew-brooklyn',
+      name: 'Hibiscus Brew',
+      address: '546 Flatbush Ave, Brooklyn, NY 11225',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri (7:30 a.m. – 6:00 p.m.), Sat-Sun (8:30 a.m. – 6:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'vmbs-brooklyn',
+      name: 'VMBS (Victoria Mutual Building Society)',
+      address: '2700 Church Avenue, Brooklyn, NY 11226',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri, 9:30 a.m. – 3:30 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'jamie-williams-office',
+      name: 'NYS Assemblywoman Jamie Williams\' District Office',
+      address: '5318 Avenue N, 1st Floor, Brooklyn, NY 11234',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri (10:00 a.m. – 6:00 p.m.), Sat (9:00 a.m. – 3:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'st-lucia-house-brooklyn',
+      name: 'St. Lucia House',
+      address: '438 East 49th St, Brooklyn, NY 11203',
+      region: 'Brooklyn',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'st-gabriel-church-brooklyn',
+      name: 'St. Gabriel\'s Episcopal Church',
+      address: '611 Degraw St, Brooklyn, NY 11217',
+      region: 'Brooklyn',
+      hours: 'Tues, Wed, Fri (9:00 a.m. – 4:00 p.m.), Sat (11:00 a.m. – 1:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'east-flatbush-village',
+      name: 'East Flatbush Village',
+      address: '1101 Utica Ave, Brooklyn, NY',
+      region: 'Brooklyn',
+      hours: 'Mon-Fri, 12:00 p.m. – 7:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'peppas-jerk-chicken-brooklyn',
+      name: 'Peppa\'s Jerk Chicken',
+      address: '1853 Nostrand Ave, Brooklyn, NY',
+      region: 'Brooklyn',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+    {
+      id: 'cj-restaurant-flatbush',
+      name: 'C & J\'s Restaurant - Flatbush',
+      address: '875 Flatbush Ave, Brooklyn, NY',
+      region: 'Brooklyn',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+    {
+      id: 'cj-restaurant-utica',
+      name: 'C & J\'s Restaurant - Utica',
+      address: '817 Utica Ave, Brooklyn, NY',
+      region: 'Brooklyn',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+
+    // NYC - Queens
+    {
+      id: 'vp-records-queens',
+      name: 'VP Records (Official Consulate Partner)',
+      address: '170-19 Jamaica Ave, Queens, NY 11432',
+      region: 'Queens',
+      hours: 'Mon-Sat, 12:00 p.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Official Consulate Partner',
+    },
+    {
+      id: 'sanders-office-queens',
+      name: 'Senator James Sanders Jr.\'s Office',
+      address: '142-01 Rockaway Blvd, South Ozone Park, NY 11436',
+      region: 'Queens',
+      hours: 'Mon-Thurs, 9:00 a.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'comrie-office-queens',
+      name: 'Senator Leroy Comrie\'s Office',
+      address: '113-43 Farmers Blvd, St. Albans, NY 11412',
+      region: 'Queens',
+      hours: 'Mon-Thurs, 9:00 a.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'hyndman-office-queens',
+      name: 'Assemblywoman Alicia Hyndman\'s Office',
+      address: '232-06 Merrick Blvd, Laurelton, NY 11413',
+      region: 'Queens',
+      hours: 'Mon-Thurs, 9:00 a.m. – 5:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'brooks-powers-far-rockaway',
+      name: 'Councilwoman Selvena Brooks-Powers\' Office - Far Rockaway',
+      address: '1931 Mott Ave, Suite 410, Far Rockaway, NY 11691',
+      region: 'Queens',
+      hours: 'Mon, Wed (9:00 a.m. – 5:00 p.m.), Thurs (11:00 a.m. – 7:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'brooks-powers-laurelton',
+      name: 'Councilwoman Selvena Brooks-Powers\' Office - Laurelton',
+      address: '222-02 Merrick Blvd, Laurelton, NY 11413',
+      region: 'Queens',
+      hours: 'Mon, Wed (9:00 a.m. – 5:00 p.m.), Thurs (11:00 a.m. – 7:00 p.m.)',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'community-church-nazarene-queens',
+      name: 'Community Church of the Nazarene',
+      address: '14-14 Central Ave, Far Rockaway, NY 11691',
+      region: 'Queens',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'first-church-nazarene-queens',
+      name: 'First Church of the Nazarene',
+      address: '108-01 95th Ave, South Richmond Hill, NY 11419',
+      region: 'Queens',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
+    {
+      id: 'merritas-restaurant-queens',
+      name: 'Merritas Restaurant',
+      address: '223-15 Linden Blvd, Queens, NY',
+      region: 'Queens',
+      hours: 'Contact for hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical'],
+    },
+
+    // NYC - Bronx
+    {
+      id: 'original-dumpling-shop-bronx',
+      name: 'The Original Dumpling Shop (Partnered with JAHJAH Foundation)',
+      address: 'Off Baychester Avenue, Bronx, NY',
+      region: 'Bronx',
+      hours: 'Open 7 days a week during business hours',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+      notes: 'Partnered with JAHJAH Foundation',
+    },
+
+    // NYC - Manhattan
+    {
+      id: 'true-indian-hair-company-manhattan',
+      name: 'True Indian Hair Company',
+      address: '225 W 35th Street, New York, NY 10001',
+      region: 'Manhattan',
+      hours: 'Mon-Fri, 11:00 a.m. – 6:00 p.m.',
+      acceptedItems: ['non-perishable-food', 'hygiene', 'baby-supplies', 'medical', 'bedding'],
+    },
   ];
 
   /**
@@ -384,6 +589,11 @@ class DropoffService {
       'South Florida (Miami-Dade)',
       'South Florida (Broward)',
       'Central Florida (Orlando)',
+      'NYC (All Boroughs)',
+      'Brooklyn',
+      'Queens',
+      'Bronx',
+      'Manhattan',
     ];
   }
 
@@ -398,6 +608,11 @@ class DropoffService {
       'South Florida (Miami-Dade)': this.locations.filter((l) => l.region === 'South Florida (Miami-Dade)').length,
       'South Florida (Broward)': this.locations.filter((l) => l.region === 'South Florida (Broward)').length,
       'Central Florida (Orlando)': this.locations.filter((l) => l.region === 'Central Florida (Orlando)').length,
+      'NYC (All Boroughs)': this.locations.filter((l) => l.region === 'NYC (All Boroughs)').length,
+      'Brooklyn': this.locations.filter((l) => l.region === 'Brooklyn').length,
+      'Queens': this.locations.filter((l) => l.region === 'Queens').length,
+      'Bronx': this.locations.filter((l) => l.region === 'Bronx').length,
+      'Manhattan': this.locations.filter((l) => l.region === 'Manhattan').length,
     };
   }
 }
