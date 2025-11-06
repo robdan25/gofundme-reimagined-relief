@@ -21,6 +21,7 @@ import Volunteer from "./pages/Volunteer";
 import ReportIssue from "./pages/ReportIssue";
 import Contact from "./pages/Contact";
 import News from "./pages/News";
+import Events from "./pages/Events";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import { Analytics } from "./components/Analytics";
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/report-issue" element={<ReportIssue />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/news" element={<News />} />
+            <Route path="/events" element={<Events />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
