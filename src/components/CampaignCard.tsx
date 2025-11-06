@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Heart, Share2, Clock } from "lucide-react";
-import { useCurrency } from "@/context/CurrencyContext";
-import { currencyService } from "@/services/currencyService";
 
 interface CampaignCardProps {
   image: string;
@@ -31,11 +29,15 @@ const CampaignCard = ({
   verified = false,
   urgent = false,
 }: CampaignCardProps) => {
-  const { currency } = useCurrency();
   const percentage = Math.min((raised / goal) * 100, 100);
-
+  
   const formatCurrency = (amount: number) => {
-    return currencyService.formatAndConvert(amount, currency);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
