@@ -36,6 +36,18 @@
       "dest": "/api/$1"
     },
     {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(jpg|jpeg|png|gif|ico|css|js|svg|json|txt|xml))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html",
       "status": 200
