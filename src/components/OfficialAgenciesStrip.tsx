@@ -4,22 +4,22 @@ const OfficialAgenciesStrip = () => {
   const agencies = [
     {
       name: "Consulate General of Jamaica, Toronto",
-      logo: "https://unbiasedrelief.org.cdn.hstgr.net/images/JCA.png",
+      logo: "https://unbiasedrelief.org/Images/JCA.png",
       alt: "Consulate General of Jamaica, Toronto",
     },
     {
       name: "Government of Jamaica",
-      logo: "https://unbiasedrelief.org.cdn.hstgr.net/images/JGJ.png",
+      logo: "https://unbiasedrelief.org/Images/JGJ.png",
       alt: "Government of Jamaica",
     },
     {
       name: "Jamaica Customs Agency",
-      logo: "https://unbiasedrelief.org.cdn.hstgr.net/images/JCG.png",
+      logo: "https://unbiasedrelief.org/Images/JCG.png",
       alt: "Jamaica Customs Agency",
     },
     {
       name: "ODPEM – Office of Disaster Preparedness and Emergency Management",
-      logo: "https://unbiasedrelief.org.cdn.hstgr.net/images/ODP.png",
+      logo: "https://unbiasedrelief.org/Images/ODP.png",
       alt: "ODPEM – Office of Disaster Preparedness and Emergency Management",
     },
   ];
