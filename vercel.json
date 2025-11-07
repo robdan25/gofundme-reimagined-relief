@@ -2,10 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
-    "api/news.ts": {
-      "memory": 1024,
-      "maxDuration": 30
-    },
     "api/jamaica-news.ts": {
       "memory": 1024,
       "maxDuration": 30
@@ -32,21 +28,17 @@
           "value": "public, s-maxage=900, stale-while-revalidate=1800"
         }
       ]
-    },
-    {
-      "source": "/api/news",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, s-maxage=600, stale-while-revalidate=1200"
-        }
-      ]
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html",
+      "status": 200
     }
   ]
 }
