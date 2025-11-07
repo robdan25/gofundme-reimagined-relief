@@ -6,11 +6,5 @@
       "memory": 1024,
       "maxDuration": 30
     }
-  },
-  "rewrites": [
-    {
-      "source": "/(?!images|assets|api|.*\\..*)(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  }
 }
