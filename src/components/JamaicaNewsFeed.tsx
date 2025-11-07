@@ -51,7 +51,7 @@ export const JamaicaNewsFeed = ({
         `🌍 [JamaicaNewsFeed] Fetching Jamaica news from server API...`
       );
 
-      const response = await fetch('/api/jamaica-news');
+      const response = await fetch('https://hurricane-melissa-relief-j4lzdt1i-unbrs-projects.vercel.app/api/jamaica-news');
 
       if (!response.ok) {
         throw new Error(`API returned status ${response.status}`);
