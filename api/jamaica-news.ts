@@ -41,7 +41,7 @@ const RSS_FEEDS = [
   },
   {
     source: "RJR News",
-    url: "https://rjrnewsonline.com/feed/",
+    url: "https://radiojamaicanewsonline.com/feed",
   },
   {
     source: "TVJ News",
