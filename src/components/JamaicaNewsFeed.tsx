@@ -23,10 +23,11 @@ interface JamaicaNewsFeedProps {
  * Jamaica News Feed Component
  *
  * Displays real Hurricane Melissa news from Jamaican news outlets.
- * Fetches server-side from /api/jamaica-news to avoid CORS issues.
+ * Tries Vercel API first, falls back to local news-data.json if API unavailable.
  *
  * Features:
- * - Server-side RSS feed aggregation (no CORS issues)
+ * - Server-side RSS feed aggregation (Vercel API)
+ * - Local fallback data for reliability
  * - 15-minute cache for performance
  * - Graceful error handling with fallback UI
  * - Responsive grid layout (mobile: 1 col, tablet: 2 cols, desktop: 3 cols)
@@ -41,6 +42,7 @@ export const JamaicaNewsFeed = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [source, setSource] = useState<'api' | 'fallback'>('api');
 
   const fetchNews = async () => {
     try {
@@ -48,29 +50,60 @@ export const JamaicaNewsFeed = ({
       setError(null);
 
       console.log(
-        `🌍 [JamaicaNewsFeed] Fetching Jamaica news from server API...`
+        `🌍 [JamaicaNewsFeed] Fetching Jamaica news from Vercel API...`
       );
 
-      const response = await fetch('https://hurricane-melissa-relief-j4lzdt1i-unbrs-projects.vercel.app/api/jamaica-news');
+      try {
+        // Try Vercel API first
+        const response = await fetch('https://hurricane-melissa-relief-j4lzdt1i-unbrs-projects.vercel.app/api/jamaica-news', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(`API returned status ${response.status}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.items && data.items.length > 0) {
+            console.log(
+              `✅ [JamaicaNewsFeed] Successfully loaded ${data.items.length} articles from Vercel API`
+            );
+            setItems(data.items.slice(0, limit));
+            setLastUpdated(new Date(data.lastUpdated));
+            setError(null);
+            setSource('api');
+            return;
+          }
+        }
+      } catch (apiErr) {
+        console.warn(
+          `⚠️ [JamaicaNewsFeed] Vercel API unavailable, trying local fallback...`,
+          apiErr
+        );
       }
 
-      const data = await response.json();
+      // Fallback to local news data
+      console.log(
+        `🌍 [JamaicaNewsFeed] Loading Jamaica news from local fallback data...`
+      );
+      const fallbackResponse = await fetch('/news-data.json');
 
-      if (data.items && data.items.length > 0) {
+      if (!fallbackResponse.ok) {
+        throw new Error('Could not load news data');
+      }
+
+      const fallbackData = await fallbackResponse.json();
+
+      if (fallbackData.items && fallbackData.items.length > 0) {
         console.log(
-          `✅ [JamaicaNewsFeed] Successfully loaded ${data.items.length} articles from ${data.sourceCount} sources`
+          `✅ [JamaicaNewsFeed] Successfully loaded ${fallbackData.items.length} articles from local fallback`
         );
-        setItems(data.items.slice(0, limit));
-        setLastUpdated(new Date(data.lastUpdated));
+        setItems(fallbackData.items.slice(0, limit));
+        setLastUpdated(new Date());
         setError(null);
+        setSource('fallback');
       } else {
-        console.warn(
-          `⚠️ [JamaicaNewsFeed] No articles returned from API, showing no news message`
-        );
-        setItems([]);
+        throw new Error('No articles in fallback data');
       }
     } catch (err) {
       const errorMsg =
@@ -158,6 +191,7 @@ export const JamaicaNewsFeed = ({
               hour: '2-digit',
               minute: '2-digit',
             })}
+            {source === 'fallback' && ' (local data)'}
           </span>
         </div>
       )}
