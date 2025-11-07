@@ -125,9 +125,9 @@ The site links to external resources:
 - Jamaica Consulate General: https://jcgtoronto.ca/melissa/
 - Government of Jamaica: https://supportjamaica.gov.jm/needs
 - Jamaica Customs: https://jca.gov.jm/list-of-disaster-relief-items-for-individuals/
-- Leon avatar: https://unbiasedrelief.org/Images/Leon.jpg
-- Header logos: https://unbiasedrelief.org/Images/UnbiasedReliefs.png
-- Heart icon: https://unbiasedrelief.org/Images/heart.png
+- Leon avatar: https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/Leon.jpg
+- Header logos: https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/UnbiasedReliefs.png
+- Heart icon: https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/heart.png
 
 ## 🆘 Troubleshooting
 

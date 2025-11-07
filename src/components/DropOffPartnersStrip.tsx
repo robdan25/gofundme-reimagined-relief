@@ -4,22 +4,22 @@ const DropOffPartnersStrip = () => {
   const partners = [
     {
       name: "Dam Foods / Caribbean Market",
-      logo: "https://unbiasedrelief.org/Images/DCM.png",
+      logo: "https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/DCM.png",
       alt: "Dam Foods Caribbean Market – GTA drop-off partner",
     },
     {
       name: "Fireside Fusion",
-      logo: "https://unbiasedrelief.org/Images/FFJ.png",
+      logo: "https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/FFJ.png",
       alt: "Fireside Fusion – GTA drop-off partner",
     },
     {
       name: "KL Brandz",
-      logo: "https://unbiasedrelief.org/Images/KLB.png",
+      logo: "https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/KLB.png",
       alt: "KL Brandz Boutique – GTA drop-off partner",
     },
     {
       name: "Jamaica Customs",
-      logo: "https://unbiasedrelief.org/Images/JCG.png",
+      logo: "https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/JCG.png",
       alt: "Jamaica Customs – GTA drop-off partner",
     },
   ];

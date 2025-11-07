@@ -15,7 +15,7 @@ const SEO = ({
   title,
   description,
   canonical = "https://unbiasedrelief.org",
-  ogImage = "https://unbiasedrelief.org/Images/hero-relief-supplies.jpg",
+  ogImage = "https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/hero-relief-supplies.jpg",
   ogType = "website",
   twitterHandle = "@unbiasedrelief",
   keywords = "Jamaica, Hurricane Melissa, Relief, Donations, Aid, Community",

@@ -28,7 +28,7 @@ const ChatBot = () => {
       >
         <div className="rounded-full shadow-lg overflow-hidden w-16 h-16 flex items-center justify-center">
           <img
-            src="https://unbiasedrelief.org/Images/HeadshotLeon.png"
+            src="https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/HeadshotLeon.png"
             alt="Leon - Chat Assistant"
             className="w-full h-full object-cover"
           />
