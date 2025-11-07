@@ -30,7 +30,7 @@ class EventsService {
       attendees: 150,
       contactEmail: 'events@unbiasedrelief.org',
       contactPhone: '+1-876-555-0100',
-      image: 'https://images.unsplash.com/photo-1559369007-7a5f36db4791?w=400&h=300&fit=crop',
+      image: 'https://unbiasedrelief.org/Images/Conven.png',
     },
     {
       id: 'event-2',
@@ -56,7 +56,7 @@ class EventsService {
       attendees: 200,
       contactEmail: 'distribution@localngos.org',
       contactPhone: '+1-876-555-0102',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop',
+      image: 'https://unbiasedrelief.org/Images/Comm.png',
       urgent: true,
     },
     {
@@ -70,7 +70,7 @@ class EventsService {
       attendees: 120,
       contactEmail: 'medical@moh.gov.jm',
       contactPhone: '+1-876-555-0103',
-      image: 'https://images.unsplash.com/photo-1576091160623-112173f7f862?w=400&h=300&fit=crop',
+      image: 'https://unbiasedrelief.org/Images/Medi.png',
     },
     {
       id: 'event-5',
@@ -83,7 +83,7 @@ class EventsService {
       attendees: 60,
       contactEmail: 'workshops@cdmu.gov.jm',
       contactPhone: '+1-876-555-0104',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1583166615346-edadc433eaa7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8amFtYWljYW4lMjBwZW9wbGUlMjB3b3Jrc2hvcCUyMHRyYWluaW5nfGVufDB8fHx8MTc2MjU1MjkyM3ww&ixlib=rb-4.1.0&q=85&w=600&h=300&fit=crop',
     },
   ];
 
