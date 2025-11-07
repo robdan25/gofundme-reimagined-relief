@@ -48,10 +48,10 @@ const HARDCODED_FALLBACK_NEWS: JamaicaNewsItem[] = [
   {
     id: 'fallback-4',
     source: 'RJR News',
-    title: 'Recovery Resources Available for Affected Families',
-    url: 'https://rjrnewsonline.com',
+    title: 'Local Communities Organize Relief Distribution Centers',
+    url: 'https://radiojamaicanewsonline.com',
     publishedAt: new Date(Date.now() - 10800000).toISOString(),
-    summary: 'Several government agencies and NGOs have made resources available to help families recover from hurricane damage. Information on assistance programs, temporary shelter, and financial aid is available.',
+    summary: 'Community leaders have established distribution centers across affected parishes to provide essential supplies to Hurricane Melissa victims. Food, water, clothing, and medical supplies are being coordinated through local relief networks.',
   },
   {
     id: 'fallback-5',
