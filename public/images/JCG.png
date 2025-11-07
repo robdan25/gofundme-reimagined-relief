@@ -36,8 +36,8 @@
     <meta name="twitter:creator" content="@unbiasedrelief" />
 
     <link rel="canonical" href="https://unbiasedrelief.org" />
-    <link rel="icon" type="image/png" href="/images/heartfav.png" />
-    <link rel="apple-touch-icon" href="/images/heartfav.png" />
+    <link rel="icon" type="image/png" href="https://unbiasedrelief.org/Images/heartfav.png" />
+    <link rel="apple-touch-icon" href="https://unbiasedrelief.org/Images/heartfav.png" />
     <link rel="alternate" hreflang="en" href="https://unbiasedrelief.org" />
 
     <!-- Google Analytics 4 -->
@@ -51,10 +51,11 @@
         'send_page_view': true
       });
     </script>
+    <script type="module" crossorigin src="/assets/index-nxC1BBTG.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BBnBogrW.css">
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
