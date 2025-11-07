@@ -2,19 +2,25 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-relief-supplies.jpg";
+import CountdownTimer from "./CountdownTimer";
 
 const Hero = () => {
   return (
     <section className="relative min-h-[600px] flex items-center overflow-hidden">
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-hero" />
+        {/* Lighter overlay for better visibility and warmth - reduced from 0.85 to 0.70 */}
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(135deg, rgba(17, 17, 17, 0.70), rgba(210, 0, 26, 0.55))'
+        }} />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl">
+          <CountdownTimer />
+
           <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
             <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
             <span className="text-sm font-medium text-white">Hurricane Melissa Relief Active</span>
