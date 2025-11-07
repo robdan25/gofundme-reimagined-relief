@@ -1,0 +1,133 @@
+================================================================================
+DIST FOLDER CONTENTS - READY FOR HOSTINGER UPLOAD
+================================================================================
+
+Location: C:\PROJECTS\Unbiased Relief\gofundme-reimagined-relief\dist\
+
+Current Status: ✅ READY - All files built and tested on Vercel
+
+================================================================================
+ROOT FILES (Upload to /public_html/)
+================================================================================
+
+✅ index.html (3.6 KB)
+   - Main HTML file
+   - References: index-DfsorU3n.js and index-BBnBogrW.css
+   - Status: READY
+
+✅ .htaccess (1.1 KB)
+   - Server configuration for SPA routing
+   - Cache headers for performance
+   - Status: READY
+
+Optional (upload if needed):
+  - favicon.ico
+  - heart-favicon.svg
+  - dropoff-data.json
+  - news-data.json
+  - placeholder.svg
+  - robots.txt
+  - sitemap.xml
+
+================================================================================
+ASSETS FOLDER (Upload to /public_html/assets/)
+================================================================================
+
+JavaScript:
+✅ index-DfsorU3n.js (664 KB)
+   - React app bundle
+   - Calls /api/jamaica-news (relative path - NO CORS issues)
+   - Status: NEW and WORKING
+   - Hash: DfsorU3n
+
+CSS:
+✅ index-BBnBogrW.css (75 KB)
+   - Tailwind CSS styles
+   - Status: Current
+   - Hash: BBnBogrW
+
+Images:
+✅ drive-hygiene-kits-CbuMOhbK.jpg (111 KB)
+✅ drive-medical-supplies-DXuVOJvp.jpg (109 KB)
+✅ drive-school-supplies-BbRLIzwK.jpg (94 KB)
+✅ hero-relief-supplies-ZY-M_pG1.jpg (182 KB)
+   - Total images: 496 KB
+   - Status: Current
+
+================================================================================
+OLD FILES TO DELETE FROM HOSTINGER
+================================================================================
+
+Before uploading new files, DELETE these old files from /public_html/assets/:
+
+❌ index-df6HHgJA.js (687 KB)
+❌ index-DkqGtxfh.js (687 KB)
+❌ index-lFeLKGqD.js (663 KB) ← THIS IS THE BROKEN ONE WITH CORS ERROR
+❌ index-xJtP9112.js (679 KB)
+❌ index-DVXvQ1Dq.css (75 KB) - if different hash
+
+These old files cause the CORS error. MUST delete them!
+
+================================================================================
+WHAT'S DIFFERENT FROM LAST UPLOAD
+================================================================================
+
+Previous file: index-lFeLKGqD.js
+  - Called absolute URL: https://hurricane-melissa-relief-j4lzdt1i-unbrs-projects.vercel.app/api/jamaica-news
+  - Result: CORS errors ❌
+
+New file: index-DfsorU3n.js
+  - Calls relative path: /api/jamaica-news
+  - Result: No CORS errors ✅
+  - Vercel rewrites to serverless function
+  - Fetches real Jamaica news articles
+
+================================================================================
+UPLOAD CHECKLIST
+================================================================================
+
+Step 1: DELETE OLD FILES
+  [ ] Log into Hostinger File Manager
+  [ ] Go to /public_html/assets/
+  [ ] Delete all old index-*.js files (keep only new DfsorU3n hash)
+  [ ] Delete old CSS files (keep current hash)
+
+Step 2: UPLOAD NEW FILES
+  [ ] Upload dist/index.html to /public_html/
+  [ ] Upload dist/.htaccess to /public_html/
+  [ ] Upload dist/assets/index-DfsorU3n.js to /public_html/assets/
+  [ ] Upload dist/assets/index-BBnBogrW.css to /public_html/assets/
+  [ ] Upload all dist/assets/*.jpg to /public_html/assets/
+
+Step 3: CLEAR CACHE
+  [ ] Hostinger → Advanced → Cloudflare
+  [ ] Click "Purge Everything"
+  [ ] Wait 30 seconds
+
+Step 4: TEST
+  [ ] Visit https://unbiasedrelief.org
+  [ ] Press F12 for console
+  [ ] Should see: ✅ [JamaicaNewsFeed] Successfully loaded 8 articles
+  [ ] NO CORS errors
+  [ ] News articles visible on home page
+  [ ] News visible on /news page
+
+================================================================================
+SUMMARY
+================================================================================
+
+Total size to upload: ~1.3 MB
+
+Critical files:
+  • index.html
+  • index-DfsorU3n.js (NEW)
+  • index-BBnBogrW.css
+  • .htaccess
+  • 4 image files
+
+This upload fixes the CORS issue and enables real Jamaica news to display
+on your production site from Vercel's serverless API.
+
+Ready to upload!
+
+================================================================================

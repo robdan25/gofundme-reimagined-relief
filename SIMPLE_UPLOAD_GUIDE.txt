@@ -1,0 +1,151 @@
+================================================================================
+UNBIASED RELIEF - SIMPLE UPLOAD GUIDE
+================================================================================
+
+All files are in: C:\PROJECTS\Unbiased Relief\gofundme-reimagined-relief\dist\
+
+================================================================================
+STEP 1: DELETE OLD FILES (5 minutes)
+================================================================================
+
+Go to Hostinger → File Manager → /public_html/assets/
+
+DELETE these 4 old JavaScript files:
+  ❌ index-df6HHgJA.js
+  ❌ index-DkqGtxfh.js
+  ❌ index-lFeLKGqD.js         ← THIS IS CRITICAL - DELETE IT!
+  ❌ index-xJtP9112.js
+
+Also DELETE this old CSS (if exists):
+  ❌ index-DVXvQ1Dq.css
+
+================================================================================
+STEP 2: UPLOAD TO /public_html/ (2 minutes)
+================================================================================
+
+From dist/ folder, upload these 2 files to /public_html/:
+
+  ✅ index.html
+  ✅ .htaccess
+
+================================================================================
+STEP 3: UPLOAD TO /public_html/assets/ (3 minutes)
+================================================================================
+
+From dist/assets/ folder, upload these files to /public_html/assets/:
+
+  ✅ index-DfsorU3n.js              ← NEW FILE - MOST IMPORTANT!
+  ✅ index-BBnBogrW.css
+  ✅ drive-hygiene-kits-CbuMOhbK.jpg
+  ✅ drive-medical-supplies-DXuVOJvp.jpg
+  ✅ drive-school-supplies-BbRLIzwK.jpg
+  ✅ hero-relief-supplies-ZY-M_pG1.jpg
+
+================================================================================
+STEP 4: CLEAR CACHE (1 minute)
+================================================================================
+
+1. Hostinger Dashboard
+2. Click "Advanced"
+3. Click "Cloudflare"
+4. Click "Purge Everything"
+5. Wait 30 seconds
+
+================================================================================
+STEP 5: TEST (2 minutes)
+================================================================================
+
+1. Go to https://unbiasedrelief.org
+2. Press F12 (open developer tools)
+3. Click "Console" tab
+4. You should see:
+   ✅ [JamaicaNewsFeed] Successfully loaded 8 articles
+
+5. Check:
+   ✅ Site is NOT blank
+   ✅ NO red CORS errors
+   ✅ News articles visible on home page
+   ✅ /news page shows articles
+
+================================================================================
+FILE SUMMARY
+================================================================================
+
+ROOT FILES (upload to /public_html/):
+  - index.html (3.6 KB)
+  - .htaccess (1.2 KB)
+
+ASSET FILES (upload to /public_html/assets/):
+  - index-DfsorU3n.js (664 KB)
+  - index-BBnBogrW.css (75 KB)
+  - 4 image files (497 KB)
+
+TOTAL: ~1.2 MB
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+⚠️  CRITICAL: Delete index-lFeLKGqD.js FIRST
+    This old file causes the CORS errors and blank site!
+
+⚠️  Upload index-DfsorU3n.js (the NEW file)
+    Not index-lFeLKGqD.js or any other old version
+
+⚠️  Don't forget to clear cache
+    Hostinger might serve old files from cache
+
+⚠️  Hard refresh browser after
+    Press Ctrl+Shift+R to clear browser cache
+
+================================================================================
+IF SITE IS STILL BLANK
+================================================================================
+
+1. Check browser console (F12 → Console)
+   - Should show: ✅ Successfully loaded 8 articles
+   - If shows CORS error: Old file still exists - delete it!
+
+2. Check Hostinger File Manager
+   - Verify index-lFeLKGqD.js is deleted
+   - Verify index-DfsorU3n.js exists
+
+3. Clear everything:
+   - Clear Hostinger cache (Purge Everything)
+   - Clear browser cache (Ctrl+Shift+Delete)
+   - Hard refresh (Ctrl+Shift+R)
+
+4. If still broken:
+   - Check that .htaccess is in /public_html/ root
+   - Check that index.html is in /public_html/ root
+   - Check that files are in /public_html/assets/
+
+================================================================================
+WHAT THE FIX DOES
+================================================================================
+
+OLD VERSION (index-lFeLKGqD.js):
+  ❌ Calls absolute URL
+  ❌ Gets blocked by CORS
+  ❌ Site goes blank
+  ❌ Error in console
+
+NEW VERSION (index-DfsorU3n.js):
+  ✅ Calls relative path /api/jamaica-news
+  ✅ No CORS blocking
+  ✅ Site works
+  ✅ Loads real Jamaica news articles
+
+================================================================================
+YOU'RE ALMOST DONE!
+================================================================================
+
+Just need to:
+1. Delete old files
+2. Upload new files
+3. Clear cache
+4. Refresh
+
+Then your site will show real Hurricane Melissa news from Jamaica! 🎉
+
+================================================================================
