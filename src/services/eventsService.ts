@@ -83,7 +83,7 @@ class EventsService {
       attendees: 60,
       contactEmail: 'workshops@cdmu.gov.jm',
       contactPhone: '+1-876-555-0104',
-      image: 'https://images.unsplash.com/photo-1583166615346-edadc433eaa7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8amFtYWljYW4lMjBwZW9wbGUlMjB3b3Jrc2hvcCUyMHRyYWluaW5nfGVufDB8fHx8MTc2MjU1MjkyM3ww&ixlib=rb-4.1.0&q=85&w=600&h=300&fit=crop',
+      image: 'https://unbiasedrelief.org/Images/ReliefLog.png',
     },
   ];
 
