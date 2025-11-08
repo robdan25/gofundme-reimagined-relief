@@ -37,6 +37,9 @@ const Header = () => {
             <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Stories
             </Link>
+            <Link to="/community-wall" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Community
+            </Link>
             <Link to="/donation-photos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Share Photos
             </Link>
@@ -83,6 +86,9 @@ const Header = () => {
               </Link>
               <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Stories
+              <Link to="/community-wall" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Community
+              </Link>
               </Link>
               <Link to="/donation-photos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Share Photos
