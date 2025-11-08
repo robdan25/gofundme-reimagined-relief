@@ -1,4 +1,4 @@
-import { Mail, Facebook, Twitter, Instagram, Linkedin, MessageSquare, Share2 } from "lucide-react";
+import { Mail, Facebook, Instagram, MessageCircle, MessageSquare, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,26 +13,26 @@ const ConnectWithUs = () => {
     {
       icon: Facebook,
       label: "Facebook",
-      url: "https://facebook.com/unbiasedrelief",
+      url: "https://facebook.com/UnbiasedRelief",
       color: "hover:text-blue-600",
-    },
-    {
-      icon: Twitter,
-      label: "Twitter/X",
-      url: "https://twitter.com/unbiasedrelief",
-      color: "hover:text-blue-400",
     },
     {
       icon: Instagram,
       label: "Instagram",
-      url: "https://instagram.com/unbiasedrelief",
+      url: "https://instagram.com/UnbiasedRelief",
       color: "hover:text-pink-600",
     },
     {
-      icon: Linkedin,
-      label: "LinkedIn",
-      url: "https://linkedin.com/company/unbiasedrelief",
-      color: "hover:text-blue-700",
+      icon: MessageCircle,
+      label: "WhatsApp",
+      url: "https://wa.me/message/UNBIASEDRELIEF",
+      color: "hover:text-green-600",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      url: "mailto:info@unbiasedrelief.org",
+      color: "hover:text-red-600",
     },
   ];
 
@@ -96,11 +96,11 @@ const ConnectWithUs = () => {
               <div className="flex gap-2 flex-wrap">
                 <Button variant="outline" className="flex-1 min-w-fit">
                   <Facebook className="w-4 h-4 mr-2" />
-                  Share
+                  Facebook
                 </Button>
                 <Button variant="outline" className="flex-1 min-w-fit">
-                  <Twitter className="w-4 h-4 mr-2" />
-                  Tweet
+                  <Instagram className="w-4 h-4 mr-2" />
+                  Instagram
                 </Button>
               </div>
             </CardContent>

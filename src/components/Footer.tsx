@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -45,17 +45,17 @@ const Footer = () => {
               Connecting donors with approved relief item drives to help Jamaica rebuild after Hurricane Melissa.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+              <a href="https://www.facebook.com/UnbiasedRelief" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Facebook">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+              <a href="https://www.instagram.com/UnbiasedRelief" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Linkedin className="w-4 h-4" />
+              <a href="https://wa.me/message/UNBIASEDRELIEF" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="WhatsApp">
+                <MessageCircle className="w-4 h-4" />
+              </a>
+              <a href="mailto:info@unbiasedrelief.org" className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Email">
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
