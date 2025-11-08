@@ -16,7 +16,7 @@ export const OrganizationSchema = () => {
     "@type": "Organization",
     name: "Unbiased Relief",
     url: "https://unbiasedrelief.org",
-    logo: "https://unbiasedrelief.org/Images/heart.png",
+    logo: "https://srv1714-files.hstgr.io/31ac3b82840430d2/files/public_html/dist/Images/heart.png",
     description:
       "Unbiased Relief provides verified aid and support for Hurricane Melissa relief efforts in Jamaica.",
     sameAs: [
@@ -63,7 +63,7 @@ export const WebPageSchema = ({
       url: "https://unbiasedrelief.org",
       logo: {
         "@type": "ImageObject",
-        url: "https://unbiasedrelief.org/Images/heart.png",
+        url: "https://srv1714-files.hstgr.io/31ac3b82840430d2/files/public_html/dist/Images/heart.png",
       },
     },
   };
@@ -151,7 +151,7 @@ export const NewsArticleSchema = ({
       name: "Unbiased Relief",
       logo: {
         "@type": "ImageObject",
-        url: "https://unbiasedrelief.org/Images/heart.png",
+        url: "https://srv1714-files.hstgr.io/31ac3b82840430d2/files/public_html/dist/Images/heart.png",
       },
     },
   };
