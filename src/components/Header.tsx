@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCommunityDropdownOpen, setIsCommunityDropdownOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border shadow-sm">
@@ -18,88 +19,110 @@ const Header = () => {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/what-to-donate" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            <Link to="/what-to-donate" className="text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2">
               What to Donate
             </Link>
-            <Link to="/official-relief-lists" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Official Lists
-            </Link>
-            <Link to="/drop-off-and-shipping" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+
+            <Link to="/drop-off-and-shipping" className="text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2">
               Drop-Off & Shipping
             </Link>
-            <Link to="/news" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              News & Updates
-            </Link>
-            <Link to="/events" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Events
-            </Link>
-            <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Stories
-            </Link>
-            <Link to="/community-wall" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Community
-            </Link>
-            <Link to="/donation-photos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Share Photos
-            </Link>
-            <Link to="/partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Partners
-            </Link>
-            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+
+            {/* Community Dropdown */}
+            <div
+              className="relative group"
+              onMouseEnter={() => setIsCommunityDropdownOpen(true)}
+              onMouseLeave={() => setIsCommunityDropdownOpen(false)}
+            >
+              <button className="text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2 flex items-center gap-1">
+                Community Wall
+                <ChevronDown className="w-4 h-4" />
+              </button>
+
+              {isCommunityDropdownOpen && (
+                <div className="absolute left-0 mt-0 w-56 bg-card border border-border rounded-lg shadow-lg py-2 z-50">
+                  <Link to="/community-wall" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    👥 Community Wall
+                  </Link>
+                  <Link to="/donation-photos" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    📸 Latest Photos & Stories
+                  </Link>
+                  <div className="border-t border-border my-2"></div>
+                  <Link to="/volunteer" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    🙌 Volunteers
+                  </Link>
+                  <Link to="/partners" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    🤝 Partners
+                  </Link>
+                  <Link to="/testimonials" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    ⭐ Testimonials
+                  </Link>
+                  <div className="border-t border-border my-2"></div>
+                  <Link to="/news" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
+                    📰 News & Updates
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2">
               About
             </Link>
+
             <Link to="/start-drive">
-              <Button size="sm" className="bg-primary hover:bg-primary-hover text-white">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover text-white ml-2">
                 Start a Drive
               </Button>
             </Link>
           </nav>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <Menu className="w-6 h-6" />
           </Button>
         </div>
 
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
-              <Link to="/what-to-donate" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+          <nav className="md:hidden py-4 border-t border-border bg-card/50">
+            <div className="flex flex-col gap-0">
+              <Link to="/what-to-donate" className="text-sm font-medium text-foreground hover:text-primary hover:bg-muted transition-colors px-4 py-3">
                 What to Donate
               </Link>
-              <Link to="/official-relief-lists" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Official Lists
-              </Link>
-              <Link to="/drop-off-and-shipping" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <Link to="/drop-off-and-shipping" className="text-sm font-medium text-foreground hover:text-primary hover:bg-muted transition-colors px-4 py-3">
                 Drop-Off & Shipping
               </Link>
-              <Link to="/news" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                News & Updates
-              </Link>
-              <Link to="/events" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Events
-              </Link>
-              <Link to="/testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Stories
-              <Link to="/community-wall" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Community
-              </Link>
-              </Link>
-              <Link to="/donation-photos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Share Photos
-              </Link>
-              <Link to="/partners" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Partners
-              </Link>
-              <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <div className="border-t border-border my-2"></div>
+              <button onClick={() => setIsCommunityDropdownOpen(!isCommunityDropdownOpen)} className="text-sm font-medium text-foreground hover:text-primary hover:bg-muted transition-colors px-4 py-3 flex items-center justify-between w-full">
+                Community Wall
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              {isCommunityDropdownOpen && (
+                <>
+                  <Link to="/community-wall" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    👥 Community Wall
+                  </Link>
+                  <Link to="/donation-photos" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    📸 Latest Photos & Stories
+                  </Link>
+                  <Link to="/volunteer" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    🙌 Volunteers
+                  </Link>
+                  <Link to="/partners" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    🤝 Partners
+                  </Link>
+                  <Link to="/testimonials" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    ⭐ Testimonials
+                  </Link>
+                  <Link to="/news" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
+                    📰 News & Updates
+                  </Link>
+                </>
+              )}
+              <div className="border-t border-border my-2"></div>
+              <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary hover:bg-muted transition-colors px-4 py-3">
                 About
               </Link>
-              <Link to="/start-drive" className="w-full">
+              <Link to="/start-drive" className="w-full px-4 py-3">
                 <Button size="sm" className="w-full bg-primary hover:bg-primary-hover text-white">
                   Start a Drive
                 </Button>
