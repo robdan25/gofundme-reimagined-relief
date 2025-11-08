@@ -13,7 +13,7 @@ const DutyFreeRelief = () => {
       {/* Hero Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/hero-relief-supplies.jpg"
+          src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/hero-relief-supplies.jpg"
           alt="Relief supplies being packed and prepared for shipment"
           className="w-full h-full object-cover"
         />

@@ -4,22 +4,22 @@ const OfficialAgenciesStrip = () => {
   const agencies = [
     {
       name: "Consulate General of Jamaica, Toronto",
-      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/JCA.png",
+      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JCA.png",
       alt: "Consulate General of Jamaica, Toronto",
     },
     {
       name: "Government of Jamaica",
-      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/JGJ.png",
+      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JGJ.png",
       alt: "Government of Jamaica",
     },
     {
       name: "Jamaica Customs Agency",
-      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/JCG.png",
+      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JCG.png",
       alt: "Jamaica Customs Agency",
     },
     {
       name: "ODPEM – Office of Disaster Preparedness and Emergency Management",
-      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/ODP.png",
+      logo: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/ODP.png",
       alt: "ODPEM – Office of Disaster Preparedness and Emergency Management",
     },
   ];
