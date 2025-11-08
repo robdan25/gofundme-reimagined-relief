@@ -29,7 +29,7 @@ const OfficialReliefLists = () => {
         "Official guidance for Canada-based donors, including the 30-day duty waiver and designated hurricane relief items for barrels, boxes, and containers.",
       buttonLabel: "View Consulate List",
       url: "https://jcgtoronto.ca/melissa/",
-      image: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JCG.png",
+      image: "https://unbiasedrelief.org/Images/JCG.png",
     },
     {
       title: "Government of Jamaica – National Needs List",
@@ -37,7 +37,7 @@ const OfficialReliefLists = () => {
         "Hurricane Melissa preliminary national needs list, covering shelter, health, water and sanitation, debris clearance, and more, scaled for up to 400,000 affected persons.",
       buttonLabel: "View National Needs List",
       url: "https://supportjamaica.gov.jm/needs",
-      image: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JGJ.png",
+      image: "https://unbiasedrelief.org/Images/JGJ.png",
     },
     {
       title: "Jamaica Customs Agency – Individual Relief Items",
@@ -45,7 +45,7 @@ const OfficialReliefLists = () => {
         "Approved disaster relief items for individuals shipping barrels, boxes, and personal consignments, including information relevant to customs and import rules.",
       buttonLabel: "View Customs Item List",
       url: "https://jca.gov.jm/list-of-disaster-relief-items-for-individuals/",
-      image: "https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/JCA.png",
+      image: "https://unbiasedrelief.org/Images/JCA.png",
     },
   ];
 
@@ -56,7 +56,7 @@ const OfficialReliefLists = () => {
       {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/Rebuild.png"
+          src="https://unbiasedrelief.org/Images/Rebuild.png"
           alt="Damaged Jamaican street after a hurricane, with residents clearing debris and beginning to rebuild."
           className="w-full h-full object-cover"
         />

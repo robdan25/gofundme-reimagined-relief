@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="mb-4">
               <img
-                src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/dist/Images/UnbiasedReliefSupport.png"
+                src="https://unbiasedrelief.org/Images/UnbiasedReliefSupport.png"
                 alt="Unbiased Relief Support"
                 className="h-9 object-contain mb-2"
               />
