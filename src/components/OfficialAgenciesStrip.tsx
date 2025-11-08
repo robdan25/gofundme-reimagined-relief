@@ -4,22 +4,22 @@ const OfficialAgenciesStrip = () => {
   const agencies = [
     {
       name: "Consulate General of Jamaica, Toronto",
-      logo: "/dist/Images/JCA.png",
+      logo: "/Images/JCA.png",
       alt: "Consulate General of Jamaica, Toronto",
     },
     {
       name: "Government of Jamaica",
-      logo: "/dist/Images/JGJ.png",
+      logo: "/Images/JGJ.png",
       alt: "Government of Jamaica",
     },
     {
       name: "Jamaica Customs Agency",
-      logo: "/dist/Images/JCG.png",
+      logo: "/Images/JCG.png",
       alt: "Jamaica Customs Agency",
     },
     {
       name: "ODPEM – Office of Disaster Preparedness and Emergency Management",
-      logo: "/dist/Images/ODP.png",
+      logo: "/Images/ODP.png",
       alt: "ODPEM – Office of Disaster Preparedness and Emergency Management",
     },
   ];
