@@ -15,7 +15,7 @@ const ChatMessage = ({ message }: ChatMessageProps) => {
       {isBot && (
         <Avatar className="h-10 w-10 flex-shrink-0 bg-primary">
           <AvatarImage
-            src="https://unbiasedrelief.org/Images/HeadshotLeon.png"
+            src="https://unbiasedrelief.org/images/HeadshotLeon.png"
             alt="Leon"
             className="object-cover"
           />

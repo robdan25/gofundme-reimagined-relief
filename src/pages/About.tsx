@@ -96,7 +96,7 @@ const About = () => {
       {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://unbiasedrelief.org/Images/Unity.png"
+          src="https://unbiasedrelief.org/images/Unity.png"
           alt="Volunteers in Jamaica packing relief boxes together, smiling and working as a team."
           className="w-full h-full object-cover"
         />

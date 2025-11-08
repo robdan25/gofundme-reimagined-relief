@@ -110,7 +110,7 @@ const Partners = () => {
       {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://unbiasedrelief.org/Images/partners.png"
+          src="https://unbiasedrelief.org/images/partners.png"
           alt="Relief partners meeting around a table with a Jamaican flag and stacked boxes in the background, smiling and shaking hands."
           className="w-full h-full object-cover"
         />

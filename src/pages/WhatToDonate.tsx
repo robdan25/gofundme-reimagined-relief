@@ -84,7 +84,7 @@ const WhatToDonate = () => {
       {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://unbiasedrelief.org/Images/flooded_community.png"
+          src="https://unbiasedrelief.org/images/flooded_community.png"
           alt="Aerial view of flooded homes and fields in Jamaica after Hurricane Melissa."
           className="w-full h-full object-cover"
         />
