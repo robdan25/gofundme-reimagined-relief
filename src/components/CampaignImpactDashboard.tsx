@@ -19,75 +19,75 @@ const CampaignImpactDashboard = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Total Items Collected */}
-          <div className="bg-card border border-border rounded-lg p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          <div className="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Items Collected
               </h3>
-              <Package className="w-5 h-5 text-primary" />
+              <Package className="w-6 h-6 text-red-600" />
             </div>
-            <div className="text-3xl font-bold text-foreground mb-1">
+            <div className="text-4xl font-bold text-gray-900 mb-2">
               {stats.totalItems.toLocaleString()}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-gray-600 mb-4">
               of {stats.totalGoal.toLocaleString()} goal items
             </p>
             {/* Progress bar */}
-            <div className="mt-3 w-full h-2 bg-blue-400 rounded-full overflow-hidden">
+            <div className="mt-4 w-full h-3 bg-gray-300 rounded-full overflow-hidden">
               <div
                 className="h-full bg-red-600 transition-all duration-300"
                 style={{ width: `${Math.min(overallProgress, 100)}%` }}
               ></div>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-sm font-semibold text-gray-800 mt-2">
               {overallProgress}% complete
             </p>
           </div>
 
           {/* Total Barrels Packed */}
-          <div className="bg-card border border-border rounded-lg p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          <div className="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Barrels Packed
               </h3>
-              <BarChart3 className="w-5 h-5 text-blue-600" />
+              <BarChart3 className="w-6 h-6 text-blue-600" />
             </div>
-            <div className="text-3xl font-bold text-foreground">
+            <div className="text-4xl font-bold text-gray-900 mb-2">
               {stats.totalBarrels}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-gray-600">
               ready for shipping
             </p>
           </div>
 
           {/* Active Campaigns */}
-          <div className="bg-card border border-border rounded-lg p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          <div className="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Campaigns
               </h3>
-              <Target className="w-5 h-5 text-amber-600" />
+              <Target className="w-6 h-6 text-amber-600" />
             </div>
-            <div className="text-3xl font-bold text-foreground">
+            <div className="text-4xl font-bold text-gray-900 mb-2">
               {stats.activeCampaigns}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-gray-600">
               {stats.verifiedCampaigns} verified by government
             </p>
           </div>
 
           {/* Days Until Deadline */}
-          <div className="bg-card border border-border rounded-lg p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          <div className="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Shipping Deadline
               </h3>
-              <CheckCircle2 className="w-5 h-5 text-green-600" />
+              <CheckCircle2 className="w-6 h-6 text-green-600" />
             </div>
-            <div className="text-3xl font-bold text-foreground">
+            <div className="text-4xl font-bold text-gray-900 mb-2">
               48
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-gray-600">
               days until December 31
             </p>
           </div>
