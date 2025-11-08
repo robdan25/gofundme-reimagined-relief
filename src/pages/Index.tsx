@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import OfficialAgenciesStrip from "@/components/OfficialAgenciesStrip";
+import CampaignImpactDashboard from "@/components/CampaignImpactDashboard";
 import FeaturedCampaigns from "@/components/FeaturedCampaigns";
 import Categories from "@/components/Categories";
 import HowItWorks from "@/components/HowItWorks";
@@ -37,6 +38,7 @@ const Index = () => {
       <main>
         <Hero />
         <OfficialAgenciesStrip />
+        <CampaignImpactDashboard />
         <FeaturedCampaigns />
         <Categories />
         <ImpactStats />

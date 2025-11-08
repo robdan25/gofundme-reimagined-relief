@@ -78,8 +78,23 @@ export const campaigns: Campaign[] = [
     daysLeft: 12,
     verified: true,
     urgent: true,
+    featured: false,
   },
 ];
+
+/**
+ * Get total campaign statistics (for dashboard)
+ */
+export const getCampaignStats = () => {
+  const stats = {
+    totalBarrels: campaigns.reduce((sum, c) => sum + c.barrelsPacked, 0),
+    totalItems: campaigns.reduce((sum, c) => sum + c.itemsCollected, 0),
+    totalGoal: campaigns.reduce((sum, c) => sum + c.goal, 0),
+    activeCampaigns: campaigns.length,
+    verifiedCampaigns: campaigns.filter(c => c.verified).length,
+  };
+  return stats;
+};
 
 /**
  * Get a campaign by ID or slug

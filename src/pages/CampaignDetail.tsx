@@ -87,7 +87,13 @@ const CampaignDetail = () => {
                         {percentage.toFixed(0)}%
                       </span>
                     </div>
-                    <Progress value={percentage} className="h-3" />
+                    {/* Custom progress bar with red progress + blue remaining */}
+                    <div className="w-full h-3 bg-blue-400 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-red-600 transition-all duration-300"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     {campaign.goal - campaign.barrelsPacked} more barrels needed

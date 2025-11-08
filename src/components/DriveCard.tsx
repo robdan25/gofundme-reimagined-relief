@@ -171,7 +171,13 @@ const DriveCard = ({
                 goal: {goal}
               </span>
             </div>
-            <Progress value={percentage} className="h-2" />
+            {/* Custom progress bar with red progress + blue remaining */}
+            <div className="w-full h-2 bg-blue-400 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-red-600 transition-all duration-300"
+                style={{ width: `${percentage}%` }}
+              ></div>
+            </div>
           </div>
           
           <div className="flex items-center justify-between text-sm">
