@@ -23,6 +23,7 @@ import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Events from "./pages/Events";
 import TestimonialsPage from "./pages/Testimonials";
+import DonationPhotos from "./pages/DonationPhotos";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import { Analytics } from "./components/Analytics";
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/news" element={<News />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/donation-photos" element={<DonationPhotos />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
