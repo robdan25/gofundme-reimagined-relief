@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, Users, Image, Handshake, Star, Heart, Newspaper } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -43,24 +43,24 @@ const Header = () => {
               {isCommunityDropdownOpen && (
                 <div className="absolute left-0 mt-0 w-56 bg-card border border-border rounded-lg shadow-lg py-2 z-50">
                   <Link to="/community-wall" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    👥 Community Wall
+                    <Users className="w-4 h-4" /> Community Wall
                   </Link>
                   <Link to="/donation-photos" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    📸 Latest Photos & Stories
+                    <Image className="w-4 h-4" /> Latest Photos & Stories
                   </Link>
                   <div className="border-t border-border my-2"></div>
                   <Link to="/volunteer" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    🙌 Volunteers
+                    <Heart className="w-4 h-4" /> Volunteers
                   </Link>
                   <Link to="/partners" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    🤝 Partners
+                    <Handshake className="w-4 h-4" /> Partners
                   </Link>
                   <Link to="/testimonials" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    ⭐ Testimonials
+                    <Star className="w-4 h-4 inline mr-2" /> Testimonials
                   </Link>
                   <div className="border-t border-border my-2"></div>
                   <Link to="/news" className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors">
-                    📰 News & Updates
+                    <Newspaper className="w-4 h-4" /> News & Updates
                   </Link>
                 </div>
               )}
@@ -111,7 +111,7 @@ const Header = () => {
                     🤝 Partners
                   </Link>
                   <Link to="/testimonials" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
-                    ⭐ Testimonials
+                    <Star className="w-4 h-4 inline mr-2" /> Testimonials
                   </Link>
                   <Link to="/news" className="text-sm text-foreground hover:text-primary hover:bg-muted transition-colors px-6 py-2">
                     📰 News & Updates
