@@ -110,7 +110,7 @@ const Partners = () => {
       {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/partners.png"
+          src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/partners.png"
           alt="Relief partners meeting around a table with a Jamaican flag and stacked boxes in the background, smiling and shaking hands."
           className="w-full h-full object-cover"
         />

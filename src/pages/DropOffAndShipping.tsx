@@ -181,7 +181,7 @@ const DropOffAndShipping = () => {
         {/* Hero Image Section */}
       <section className="relative w-full max-h-[450px] overflow-hidden">
         <img
-          src="https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/dropoff.png"
+          src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/dropoff.png"
           alt="People unloading boxes and blue barrels at a relief drop-off location in front of a storefront."
           className="w-full h-full object-cover"
         />

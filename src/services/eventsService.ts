@@ -30,7 +30,7 @@ class EventsService {
       attendees: 150,
       contactEmail: 'events@unbiasedrelief.org',
       contactPhone: '+1-876-555-0100',
-      image: 'https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/Conven.png',
+      image: 'https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/Conven.png',
     },
     {
       id: 'event-2',
@@ -56,7 +56,7 @@ class EventsService {
       attendees: 200,
       contactEmail: 'distribution@localngos.org',
       contactPhone: '+1-876-555-0102',
-      image: 'https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/Comm.png',
+      image: 'https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/Comm.png',
       urgent: true,
     },
     {
@@ -70,7 +70,7 @@ class EventsService {
       attendees: 120,
       contactEmail: 'medical@moh.gov.jm',
       contactPhone: '+1-876-555-0103',
-      image: 'https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/Medi.png',
+      image: 'https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/Medi.png',
     },
     {
       id: 'event-5',
@@ -83,7 +83,7 @@ class EventsService {
       attendees: 60,
       contactEmail: 'workshops@cdmu.gov.jm',
       contactPhone: '+1-876-555-0104',
-      image: 'https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/ReliefLog.png',
+      image: 'https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/ReliefLog.png',
     },
   ];
 

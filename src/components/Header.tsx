@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="hover:opacity-80 transition-opacity cursor-pointer">
             <img
-              src="https://srv1714-files.hstgr.io/b320ad88c348746b/files/public_html/Images/UnbiasedReliefheart.png"
+              src="https://srv1714-files.hstgr.io/faf546e4be15964e/files/public_html/Images/UnbiasedReliefheart.png"
               alt="Unbiased Relief"
               className="h-8 sm:h-10 object-contain"
             />
