@@ -41,7 +41,7 @@ const HARDCODED_FALLBACK_NEWS: JamaicaNewsItem[] = [
     id: 'fallback-3',
     source: 'Jamaica Star',
     title: 'Emergency Response Team Deployed to Affected Areas',
-    url: 'https://www.jamaicastar.com',
+    url: 'https://jamaica-star.com/',
     publishedAt: new Date(Date.now() - 7200000).toISOString(),
     summary: 'Government emergency services have been deployed to the hardest-hit areas. Medical teams are standing by to assist with any injuries. The situation is being monitored closely as weather patterns develop.',
   },

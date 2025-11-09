@@ -29,7 +29,7 @@ class RSSNewsAggregator {
       source: 'Jamaica Observer',
     },
     {
-      url: 'http://jamaica-star.com/feed/news.xml',
+      url: 'https://jamaica-star.com/',
       source: 'Jamaica Star',
     },
     {
@@ -37,7 +37,7 @@ class RSSNewsAggregator {
       source: 'RJR News',
     },
     {
-      url: 'https://www.televisionjamaica.com/category/news/feed/',
+      url: 'https://www.televisionjamaica.com/',
       source: 'TVJ News',
     },
   ];
