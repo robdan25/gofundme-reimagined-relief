@@ -45,7 +45,7 @@ const RSS_FEEDS = [
   },
   {
     source: "TVJ News",
-    url: "https://www.tvjnews.com/feed/",
+    url: "https://www.televisionjamaica.com/",
   },
 ];
 

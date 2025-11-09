@@ -57,7 +57,7 @@ const HARDCODED_FALLBACK_NEWS: JamaicaNewsItem[] = [
     id: 'fallback-5',
     source: 'TVJ News',
     title: 'Jamaica Stands Together - Unity in Crisis Response',
-    url: 'https://www.tvjnews.com',
+    url: 'https://www.televisionjamaica.com/',
     publishedAt: new Date(Date.now() - 14400000).toISOString(),
     summary: 'Jamaicans across the island are showing solidarity with affected communities. Businesses, churches, and individuals are contributing to relief efforts. The spirit of unity is helping accelerate the recovery process.',
   },
